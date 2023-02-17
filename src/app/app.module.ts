@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,10 +14,6 @@ import { AcercaDeComponent } from './componentes/main/acerca-de/acerca-de.compon
 import { ExperienciaComponent } from './componentes/main/experiencia/experiencia.component';
 import { EducacionComponent } from './componentes/main/educacion/educacion.component';
 //import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-
-
 
 @NgModule({
   declarations: [
@@ -29,8 +29,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

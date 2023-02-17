@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/service/authentication.service';
+//import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -14,7 +14,7 @@ export class IniciarSesionComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     //hacemos la inyección de "AuthenticationService" para poder autentificar el mail del usuario
-    private authenticationService: AuthenticationService,
+    // private authenticationService: AuthenticationService,
     private rutas: Router
   ) {
     this.form = this.formBuilder.group({
@@ -35,10 +35,10 @@ export class IniciarSesionComponent implements OnInit {
     return this.form.get('password');
   }
 
-  onEnviar(event: Event) {
-    event.preventDefault();
-    this.authenticationService.iniciarSesion(this.form.value).subscribe(data => {
+  // onEnviar(event: Event) {
+  //   event.preventDefault();
+  //   this.authenticationService.iniciarSesion(this.form.value).subscribe(data => {
 
-    })
-  }
+  //   })
+  // }
 }
