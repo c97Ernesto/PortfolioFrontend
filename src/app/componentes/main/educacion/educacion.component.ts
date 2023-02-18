@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Educacion } from 'src/app/model/educacion';
 import { EducacionService } from 'src/app/service/educacion.service';
 //Con FormGroup, indentificamos el formDeCreacion y todo su contenido
@@ -13,24 +13,15 @@ import { EducacionService } from 'src/app/service/educacion.service';
 })
 export class EducacionComponent implements OnInit {
   estudios: Educacion[] = [];
-  formDeCreacion: FormGroup;
   editEducacion: Educacion;
   deleteEducacion: Educacion;
 
   constructor(
-    private estudioService: EducacionService,
-    private formBuilder: FormBuilder
-  ) {
-    this.formDeCreacion = this.formBuilder.group({
-      //mismo nombre que la clase Entity
-      nombre: ['', [Validators.required]],
-      descripcion: '',
-    });
-  }
+    private estudioService: EducacionService
+  ){ }
 
   ngOnInit(): void {
     this.obtenerEstudios();
-    console.log(this.formDeCreacion);
   }
 
   public obtenerEstudios(): void {
@@ -43,17 +34,17 @@ export class EducacionComponent implements OnInit {
     );
   }
 
-  public onAgregarEducacion(formulario: FormGroup): void {
-    console.log(formulario);
-    console.log(formulario.value)
+  public onAgregarEducacion(formulario: NgForm): void {
+    // console.log(formulario);
+    // console.log(formulario.value)
     this.estudioService.agregarEducacion(formulario.value).subscribe(
       (response: Educacion) => {
         console.log(response);
         this.obtenerEstudios();
-        this.formDeCreacion.reset();
+        formulario.reset();
       }, (error: HttpErrorResponse) => {
         alert(error.message);
-        this.formDeCreacion.reset();
+        formulario.reset();
       }
     );
   }
@@ -62,6 +53,7 @@ export class EducacionComponent implements OnInit {
     this.estudioService.actualizarEducacion(educacion).subscribe(
       (response: Educacion) => {
         console.log("Actualizado");
+        // console.log(response);
         this.obtenerEstudios();
       }, (error: HttpErrorResponse) => {
         alert(error.message);

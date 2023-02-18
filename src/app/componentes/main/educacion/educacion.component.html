@@ -39,10 +39,9 @@
                                 data-placement="top" data-original-title="Edit">
                                 <i class="bi bi-pencil"></i>
                             </a>
-
                             <a (click)="onOpenModal(educacion, 'eliminar')" class="btn btn-danger" data-placement="top"
                                 data-original-title="Delete">
-                                <i class="bi bi-x-lg"></i>
+                                <i class="bi bi-trash"></i>
                             </a>
                         </div>
                     </div>
@@ -69,18 +68,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="formDeCreacion" (ngSubmit)="onAgregarEducacion(formDeCreacion)" name="formDeCreacion"
-                    id="formDeCreacion">
+                <form #formDeCreacion="ngForm" (ngSubmit)="onAgregarEducacion(formDeCreacion)" id="formDeCreacion">
                     <div class="form-floating mb-3">
-                        <input type="text" formControlName="nombre" class="form-control" id="nombre">
+                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required="">
                         <label for="nombre">Nombre</label>
-                        <div class="alert alert-danger" role="alert"
-                            *ngIf="(formDeCreacion.controls['nombre'].invalid && formDeCreacion.controls['nombre'].touched)">
+                        <!-- <div class="alert alert-danger" role="alert">
                             Campo obligatorio!
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-floating">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
+                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
                     <!-- <div class="form-floating">
@@ -113,23 +110,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="formDeCreacion" (ngSubmit)="onActualizarEducacion(formDeCreacion.value)" name="formDeCreacion"
-                    id="formDeCreacion">
+                <form #formDeActualizacion="ngForm" (ngSubmit)="onActualizarEducacion(formDeActualizacion.value)" id="formDeActualizacion">
                     <div class="form-floating mb-3">
-                        <input type="text" formControlName="nombre" class="form-control" id="nombre">
+                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
                         <label for="nombre">Nombre</label>
-                        <div class="alert alert-danger" role="alert"
-                            *ngIf="(formDeCreacion.controls['nombre'].invalid && formDeCreacion.controls['nombre'].touched)">
+                        <!-- <div class="alert alert-danger" role="alert">
                             Campo obligatorio!
-                        </div>
+                        </div> -->
                     </div>
+                    <input type="hidden" ngModel="{{editEducacion?.id}}" name="id" class="form-control" id="id" placeholder="Email">
                     <div class="form-floating">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
+                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
                     <!-- <div class="form-floating">
                         <label for="imagenUrl">Imagen URL</label>
-                        <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
+                        <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl"
                            placeholder="Image URL" required>
                     </div> -->
                 </form>
@@ -138,7 +134,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button  form="formDeCreacion" [disabled]="!formDeCreacion.valid" class="btn btn-primary">
+                    <button  form="formDeActualizacion" [disabled]="!formDeActualizacion.valid" class="btn btn-primary">
                         Actualizar
                     </button>
                 </div>
@@ -159,7 +155,7 @@
             </div>
 
             <div class="modal-body">
-                <p>Seguro que se desea eliminar el estudio?</p>
+                <p>Seguro que se desea eliminar la educacíon "{{deleteEducacion?.nombre}}"</p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <button (click)="onEliminarEducacion(deleteEducacion.id)" class="btn btn-danger"
