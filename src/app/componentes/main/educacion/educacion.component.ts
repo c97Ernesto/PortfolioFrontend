@@ -12,8 +12,10 @@ import { EducacionService } from 'src/app/service/educacion.service';
   styleUrls: ['./educacion.component.css']
 })
 export class EducacionComponent implements OnInit {
-  estudios: Educacion[] = []; 
+  estudios: Educacion[] = [];
   formDeCreacion: FormGroup;
+  editEducacion: Educacion;
+  deleteEducacion: Educacion;
 
   constructor(
     private estudioService: EducacionService,
@@ -21,13 +23,13 @@ export class EducacionComponent implements OnInit {
   ) {
     this.formDeCreacion = this.formBuilder.group({
       //mismo nombre que la clase Entity
-      nombre: ['',[Validators.required]],
+      nombre: ['', [Validators.required]],
       descripcion: '',
     });
   }
-  
+
   ngOnInit(): void {
-    this.obtenerEstudios();    
+    this.obtenerEstudios();
     console.log(this.formDeCreacion);
   }
 
@@ -41,32 +43,67 @@ export class EducacionComponent implements OnInit {
     );
   }
 
-  public onAgregarEducacion(): void {
-    console.log(this.formDeCreacion);
-    console.log(this.formDeCreacion.value)
-    this.estudioService.agregarEducacion(this.formDeCreacion.value).subscribe(
+  public onAgregarEducacion(formulario: FormGroup): void {
+    console.log(formulario);
+    console.log(formulario.value)
+    this.estudioService.agregarEducacion(formulario.value).subscribe(
       (response: Educacion) => {
         console.log(response);
         this.obtenerEstudios();
         this.formDeCreacion.reset();
-      },(error: HttpErrorResponse) => {
+      }, (error: HttpErrorResponse) => {
         alert(error.message);
         this.formDeCreacion.reset();
       }
     );
   }
 
-  onActualizarEducacion() {
-    
+  public onActualizarEducacion(educacion: Educacion): void {
+    this.estudioService.actualizarEducacion(educacion).subscribe(
+      (response: Educacion) => {
+        console.log("Actualizado");
+        this.obtenerEstudios();
+      }, (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-  onEliminarEducacion() {
-    
+  public onEliminarEducacion(id: number): void {
+    this.estudioService.eliminarEducacion(id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.obtenerEstudios();
+      }, (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-  public onSubmit() {
-    
+  public onOpenModal(educacion: Educacion, modo: string) {
+    const contenedor = document.getElementById('container-educacion');
+    const boton = document.createElement('button');
+
+    boton.type = 'button';
+    boton.style.display = 'none';
+    boton.setAttribute('data-bs-toggle', 'modal');
+
+    if (modo === 'agregar') {
+      boton.setAttribute('data-bs-target', '#agregarEducacionModal');
+    }
+    if (modo === 'actualizar') {
+      this.editEducacion = educacion;
+      boton.setAttribute('data-bs-target', '#actualizarEducacionModal');
+    }
+    if (modo === 'eliminar') {
+      this.deleteEducacion = educacion;
+      boton.setAttribute('data-bs-target', '#eliminarEducacionModal');
+    }
+
+    contenedor.appendChild(boton);
+    boton.click();
+
   }
 
-  
+
 }
