@@ -41,12 +41,7 @@ export class EducacionComponent implements OnInit {
     );
   }
 
-  public onAgregarEmpleado(): void {
-   
-    
-  }
-
-  public onSubmit() {
+  public onAgregarEducacion(): void {
     console.log(this.formDeCreacion);
     console.log(this.formDeCreacion.value)
     this.estudioService.agregarEducacion(this.formDeCreacion.value).subscribe(
@@ -59,6 +54,18 @@ export class EducacionComponent implements OnInit {
         this.formDeCreacion.reset();
       }
     );
+  }
+
+  onActualizarEducacion() {
+    
+  }
+
+  onEliminarEducacion() {
+    
+  }
+
+  public onSubmit() {
+    
   }
 
   

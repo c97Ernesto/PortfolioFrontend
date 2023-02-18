@@ -36,7 +36,7 @@
                         </a>
                         <div>
                             <div class="btn-edit">
-                                <button class="btn btn-light">
+                                <button data-bs-toggle="modal" data-bs-target="#formEdicion" class="btn btn-light">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
@@ -60,7 +60,7 @@
 </div>
 
 
-<!-- Modal Form-->
+<!-- Modal, Agregar Educacion-->
 <div class="modal fade" id="ventanaForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -70,7 +70,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="formDeCreacion" (submit)="onSubmit()" name="formDeCreacion" id="formDeCreacion">
+                <form [formGroup]="formDeCreacion" (submit)="onAgregarEducacion()" name="formDeCreacion" id="formDeCreacion">
                     <div class="form-floating mb-3">
                         <input type="text" formControlName="nombre" class="form-control" id="nombre">
                         <label for="nombre">Nombre</label>
@@ -83,6 +83,11 @@
                         <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
+                    <!-- <div class="form-floating">
+                        <label for="imagenUrl">Imagen URL</label>
+                        <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
+                           placeholder="Image URL" required>
+                    </div> -->
                 </form>
                 <!-- submit no funciona. está fuera del form -->
                 <div class="modal-footer">
@@ -96,3 +101,5 @@
         </div>
     </div>
 </div>
+
+<!-- Modal, Actualizar Educacion-->
