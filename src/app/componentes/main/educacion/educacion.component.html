@@ -1,0 +1,167 @@
+<div id="container-educacion" class="contenedor">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex">
+                <h3 class="card-title">Educacion</h3>
+                <!-- <div class="btn-edit">
+                    <a class="btn btn-light" href="#" role="button">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                </div> -->
+            </div>
+            <!-- <div class="d-flex">
+                <p class="card-text">Info general de la educacion.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias alias qui necessitatibus.
+                    Consequatur veritatis dolorum tempora adipisci eius! Hic quasi a error velit mollitia modi dolorum
+                    veritatis pariatur ratione deleniti.
+                </p>
+                <div class="btn-edit">
+                    <a class="btn btn-light" href="#" role="button"><i class="bi bi-pencil"></i></a>
+                </div>
+            </div> -->
+            <ul class="list-group">
+                <li *ngFor="let educacion of estudios">
+                    <div class="list-container">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <!-- <div class="col-6">
+                                <a href=""><img src="{{educacion?.imagenUrl}}" alt="foto-de-la-educacion" class="img-fluid rounded-circle w-60"></a>
+                             </div> -->
+                            <div class="logo-image-container">
+                                <img src="../../../../assets/Imagenes/ig.png">
+                            </div>
+                            <div class="list-info ">
+                                <h5 class="mb-1">{{educacion?.nombre}}</h5>
+                                <p class="mb-1">{{educacion?.descripcion}}</p>
+                            </div>
+                        </a>
+                        <div>
+                            <a (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-secondary"
+                                data-placement="top" data-original-title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a (click)="onOpenModal(educacion, 'eliminar')" class="btn btn-danger" data-placement="top"
+                                data-original-title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <div>
+                    <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
+                        Agregar Estudio
+                    </a>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal, Agregar Educacion-->
+<div class="modal fade" id="agregarEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Estudio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #formDeCreacion="ngForm" (ngSubmit)="onAgregarEducacion(formDeCreacion)" id="formDeCreacion">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required="">
+                        <label for="nombre">Nombre</label>
+                        <!-- <div class="alert alert-danger" role="alert">
+                            Campo obligatorio!
+                        </div> -->
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
+                        <label for="descripcion">Descripcion</label>
+                    </div>
+                    <!-- <div class="form-floating">
+                        <label for="imagenUrl">Imagen URL</label>
+                        <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
+                           placeholder="Image URL" required>
+                    </div> -->
+                </form>
+                <!-- submit no funciona. está fuera del form -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button type="submit" form="formDeCreacion" [disabled]="!formDeCreacion.valid"
+                        class="btn btn-primary">
+                        Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal, Actualizar Educacion-->
+<div class="modal fade" id="actualizarEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Estudio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #formDeActualizacion="ngForm" (ngSubmit)="onActualizarEducacion(formDeActualizacion.value)" id="formDeActualizacion">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
+                        <label for="nombre">Nombre</label>
+                        <!-- <div class="alert alert-danger" role="alert">
+                            Campo obligatorio!
+                        </div> -->
+                    </div>
+                    <input type="hidden" ngModel="{{editEducacion?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+                    <div class="form-floating">
+                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
+                        <label for="descripcion">Descripcion</label>
+                    </div>
+                    <!-- <div class="form-floating">
+                        <label for="imagenUrl">Imagen URL</label>
+                        <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl"
+                           placeholder="Image URL" required>
+                    </div> -->
+                </form>
+                <!-- submit no funciona. está fuera del form -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button  form="formDeActualizacion" [disabled]="!formDeActualizacion.valid" class="btn btn-primary">
+                        Actualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal, Eliminar Educacion-->
+<div class="modal fade" id="eliminarEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Estudio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <p>Seguro que se desea eliminar la educacíon "{{deleteEducacion?.nombre}}"</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button (click)="onEliminarEducacion(deleteEducacion.id)" class="btn btn-danger"
+                        data-bs-dismiss="modal">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

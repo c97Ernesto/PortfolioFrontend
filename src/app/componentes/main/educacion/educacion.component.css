@@ -1,0 +1,79 @@
+/* GENERAL */
+.contenedor {
+   display: inline-flex;
+   max-width: 800px;
+   padding-bottom: 5px;
+}
+
+/* STYLE 2 */
+.card-img-top {
+   width: 100px;
+   right: 50%;
+}
+
+
+
+/* STYLE 1 */
+
+
+.card-title {
+   margin-right: 20px;
+}
+
+.list-container {
+   display: flex;
+   max-width: 350px;
+}
+
+.list-group-item {
+   display: flex;
+   align-items: center;
+}
+
+.logo-image-container {
+   margin-right: 10px;
+}
+
+.logo-image-container img {
+   width: 75px;
+}
+
+.list-info {
+   text-align: center;
+   margin: 0%;
+}
+
+/* .contenedor {
+    margin-bottom: 10px;
+} */
+
+/* .card-body  div {
+    display: flex;
+    align-items: flex-start;   
+} */
+
+
+/* .btn-edit {
+   float:
+} */
+
+/* HEADER
+.navbar-brand {
+   margin-right: 5px;
+}
+
+.logos-redes {
+   width: 30px;
+}
+
+/* PERFIL
+.perfil{
+   flex-direction: column;
+}
+
+.imagen-perfil {
+   margin-top: -65px;
+   width: 100px;
+   height: 100px;
+   border-radius: 50%;
+} */
