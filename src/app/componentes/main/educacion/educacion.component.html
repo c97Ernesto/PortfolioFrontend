@@ -1,29 +1,15 @@
-<div id="container-educacion" class="contenedor">
+<div id="container-educacion">
     <div class="card">
         <div class="card-body">
             <div class="d-flex">
                 <h3 class="card-title">Educacion</h3>
-                <!-- <div class="btn-edit">
-                    <a class="btn btn-light" href="#" role="button">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                </div> -->
             </div>
-            <!-- <div class="d-flex">
-                <p class="card-text">Info general de la educacion.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias alias qui necessitatibus.
-                    Consequatur veritatis dolorum tempora adipisci eius! Hic quasi a error velit mollitia modi dolorum
-                    veritatis pariatur ratione deleniti.
-                </p>
-                <div class="btn-edit">
-                    <a class="btn btn-light" href="#" role="button"><i class="bi bi-pencil"></i></a>
-                </div>
-            </div> -->
-            <ul class="list-group">
-                <li *ngFor="let educacion of estudios">
-                    <div class="list-container">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <!-- <div class="col-6">
+            <div class="row align-items-center justify-content-between">
+                <div class="list-group col-lg-8 col-md-12">
+                    <div *ngFor="let educacion of estudios"
+                        class="list-group-item d-flex justify-content-between">
+                        <div class="">
+                            <!-- <div class="logo-image-container">
                                 <a href=""><img src="{{educacion?.imagenUrl}}" alt="foto-de-la-educacion" class="img-fluid rounded-circle w-60"></a>
                              </div> -->
                             <div class="logo-image-container">
@@ -33,8 +19,8 @@
                                 <h5 class="mb-1">{{educacion?.nombre}}</h5>
                                 <p class="mb-1">{{educacion?.descripcion}}</p>
                             </div>
-                        </a>
-                        <div>
+                        </div>
+                        <div class="">
                             <a (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-secondary"
                                 data-placement="top" data-original-title="Edit">
                                 <i class="bi bi-pencil"></i>
@@ -45,13 +31,13 @@
                             </a>
                         </div>
                     </div>
-                </li>
-                <div>
+                </div>
+                <div class="col-lg-4">
                     <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
                         Agregar Estudio
                     </a>
                 </div>
-            </ul>
+            </div>
 
         </div>
     </div>
@@ -93,7 +79,8 @@
                     </button>
                     <button type="submit" form="formDeCreacion" [disabled]="!formDeCreacion.valid"
                         class="btn btn-primary">
-                        Agregar</button>
+                        Agregar
+                    </button>
                 </div>
             </div>
         </div>
@@ -110,7 +97,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #formDeActualizacion="ngForm" (ngSubmit)="onActualizarEducacion(formDeActualizacion.value)" id="formDeActualizacion">
+                <form #formDeActualizacion="ngForm" (ngSubmit)="onActualizarEducacion(formDeActualizacion.value)"
+                    id="formDeActualizacion">
                     <div class="form-floating mb-3">
                         <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
                         <label for="nombre">Nombre</label>
@@ -118,7 +106,7 @@
                             Campo obligatorio!
                         </div> -->
                     </div>
-                    <input type="hidden" ngModel="{{editEducacion?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+                    <input type="hidden" ngModel="{{editEducacion?.id}}" name="id" class="form-control" id="id">
                     <div class="form-floating">
                         <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
@@ -134,7 +122,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button  form="formDeActualizacion" [disabled]="!formDeActualizacion.valid" class="btn btn-primary">
+                    <button form="formDeActualizacion" [disabled]="!formDeActualizacion.valid" class="btn btn-primary">
                         Actualizar
                     </button>
                 </div>

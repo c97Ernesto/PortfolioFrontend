@@ -21,10 +21,10 @@ li {
     margin-bottom: 10px;
 }
 
-.card-body  div {
+/* .card-body  div {
     display: flex;
     align-items: flex-start;   
-}
+} */
 
 .card {
     margin: 2px;
