@@ -8,7 +8,7 @@
                 <div class="list-group col-lg-8 col-md-12">
                     <div *ngFor="let educacion of estudios"
                         class="list-group-item d-flex justify-content-between">
-                        <div class="">
+                        <div class="d-flex align-items-center">
                             <!-- <div class="logo-image-container">
                                 <a href=""><img src="{{educacion?.imagenUrl}}" alt="foto-de-la-educacion" class="img-fluid rounded-circle w-60"></a>
                              </div> -->
@@ -20,7 +20,7 @@
                                 <p class="mb-1">{{educacion?.descripcion}}</p>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="d-flex align-items-start">
                             <a (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-secondary"
                                 data-placement="top" data-original-title="Edit">
                                 <i class="bi bi-pencil"></i>

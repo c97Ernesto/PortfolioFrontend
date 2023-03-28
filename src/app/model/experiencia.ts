@@ -1,12 +1,12 @@
 //Réplica del Entity que tenemos en el back
 export class Experiencia {
     id?: number; 
-    nombreExp: string;
-    descripcionExp: string;
+    nombre: string;
+    descripcion: string;
 
-    constructor(nombreExp: string, descripcionExp: string) {
-        this.nombreExp = nombreExp;
-        this.descripcionExp = descripcionExp;
+    constructor(nombre: string, descripcion: string) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
     
 }
