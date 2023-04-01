@@ -34,6 +34,12 @@ export class EducacionComponent implements OnInit {
     );
   }
 
+  //Errores en los formularios por tener el mismo nombre en los distintos 
+  //componentes html (educacion/experiencia).
+  //Cambiar nombres provisoriamente.
+  //Cambiar modal.
+  
+
   public onAgregarEducacion(formulario: NgForm): void {
     // console.log(formulario);
     // console.log(formulario.value)
