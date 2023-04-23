@@ -13,6 +13,8 @@ import { PerfilComponent } from './componentes/main/perfil/perfil.component';
 import { AcercaDeComponent } from './componentes/main/acerca-de/acerca-de.component';
 import { ExperienciaComponent } from './componentes/main/experiencia/experiencia.component';
 import { EducacionComponent } from './componentes/main/educacion/educacion.component';
+import { LoginComponent } from './page/login/login.component';
+
 //import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 
 @NgModule({
@@ -24,6 +26,8 @@ import { EducacionComponent } from './componentes/main/educacion/educacion.compo
     ExperienciaComponent,
     EducacionComponent,
     MainComponent,
+    LoginComponent,
+
     //IniciarSesionComponent
   ],
   imports: [
