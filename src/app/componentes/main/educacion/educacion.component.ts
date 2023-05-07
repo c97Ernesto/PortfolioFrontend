@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Educacion } from 'src/app/model/educacion';
+import { LoginService } from 'src/app/service/authentication/login.service';
 import { EducacionService } from 'src/app/service/educacion.service';
 //Con FormGroup, indentificamos el formDeCreacion y todo su contenido
 //FormBuilder, directiva para formar un grupo de componentes que va dentro del form
@@ -16,12 +17,16 @@ export class EducacionComponent implements OnInit {
   editEducacion: Educacion;
   deleteEducacion: Educacion;
 
+  isLogged = false;
+
   constructor(
-    private estudioService: EducacionService
+    private estudioService: EducacionService,
+    private loginService: LoginService
   ){ }
 
   ngOnInit(): void {
     this.obtenerEstudios();
+    this.isLogged = this.loginService.isLoggedIn();
   }
 
   public obtenerEstudios(): void {
@@ -33,11 +38,6 @@ export class EducacionComponent implements OnInit {
       }
     );
   }
-
-  //Errores en los formularios por tener el mismo nombre en los distintos 
-  //componentes html (educacion/experiencia).
-  //Cambiar nombres provisoriamente.
-  //Cambiar modal.
   
 
   public onAgregarEducacion(formulario: NgForm): void {

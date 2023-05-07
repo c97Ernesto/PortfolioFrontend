@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Experiencia } from 'src/app/model/experiencia';
+import { LoginService } from 'src/app/service/authentication/login.service';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
 
 @Component({
@@ -14,12 +15,16 @@ export class ExperienciaComponent {
   editExperiencia: Experiencia;
   deleteExperiencia: Experiencia;
 
+  isLogged = false;
+
   constructor(
-    private experienciaService: ExperienciaService
+    private experienciaService: ExperienciaService,
+    private loginService: LoginService
   ){ }
 
   ngOnInit(): void {
     this.obtenerExperiencia();
+    this.isLogged = this.loginService.isLoggedIn();
   }
 
   public obtenerExperiencia(): void {

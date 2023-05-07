@@ -15,6 +15,8 @@ import { ExperienciaComponent } from './componentes/main/experiencia/experiencia
 import { EducacionComponent } from './componentes/main/educacion/educacion.component';
 import { LoginComponent } from './page/login/login.component';
 
+import { authInterceptorProviders } from './service/authentication/auth.interceptor';
+
 //import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 
 @NgModule({
@@ -28,7 +30,7 @@ import { LoginComponent } from './page/login/login.component';
     MainComponent,
     LoginComponent,
 
-    //IniciarSesionComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import { LoginComponent } from './page/login/login.component';
     FormsModule, ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
