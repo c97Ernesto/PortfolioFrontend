@@ -1,8 +1,8 @@
 <!-- Card 1: Acerca de -->
-<div id="acerca-de" class="contenedor">
+<div id="acerca-de">
     <div class="card ">
         <div class="card-body">
-            <div>
+            <div class="d-flex justify-content-between">
                 <h5 class="card-title">Acerca de</h5>
                 <div *ngIf="isLogged" class="btn-edit">
                     <a class="btn btn-light" href="#" role="button"><i class="bi bi-pencil"></i></a>
@@ -18,9 +18,6 @@
                     ional content.
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit possimus repellendus
                     c</p>
-                <div *ngIf="isLogged" class="btn-edit">
-                    <a class="btn btn-light" href="#" role="button"><i class="bi bi-pencil"></i></a>
-                </div>
             </div>
         </div>
     </div>

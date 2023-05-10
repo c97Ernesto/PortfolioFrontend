@@ -11,10 +11,6 @@ import { LoginReq } from 'src/app/service/authentication/loginReq';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  isLogged = false;
-  isLoginFailed = false;
-
-  loginError: '';
 
   constructor(
     private fb: FormBuilder,
@@ -42,16 +38,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid){
       this.loginService.generateToken(this.loginForm.value as LoginReq).subscribe(
         (data:any) => {
-          console.log(data);
           this.loginService.loginUser(data.token);
-          this.isLogged = true;
           this.loginService.getCurrentUser().subscribe((user:any) => {
             this.loginService.setUser(user);
-            console.log(user);
             if(this.loginService.getUserRole() == 'ADMIN'){
               this.router.navigate(['/']);
-              this.loginService.loginStatusSubjec.next(true);
-              
+              this.loginService.loginStatusSubjec.next(true);              
             }
             else if(this.loginService.getUserRole() == 'NORMAL'){
               this.router.navigate(['/']);
@@ -62,8 +54,6 @@ export class LoginComponent implements OnInit {
             }
           });
         }, error => {
-          this.isLogged = false;
-          this.isLoginFailed = true;
           alert("Detalles inválidos, vuelve a intentar!!");
         }
       )}

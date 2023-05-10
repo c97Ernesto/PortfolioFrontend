@@ -8,7 +8,6 @@ import { LoginService } from 'src/app/service/authentication/login.service';
 })
 export class AcercaDeComponent{
   
-  
   isLogged = false;
 
   constructor(

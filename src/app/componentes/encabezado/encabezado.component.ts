@@ -12,7 +12,7 @@ export class EncabezadoComponent {
   isLogged = false  
 
   constructor(
-    private loginService: LoginService,
+    public loginService: LoginService,
     private router: Router
   ) {}
 
@@ -20,12 +20,12 @@ export class EncabezadoComponent {
     this.isLogged = this.loginService.isLoggedIn();
   }
 
-  public login() {
+  public logIn() {
     this.router.navigateByUrl('/login');
   }
 
-  public logout() {
-    this.isLogged = !this.loginService.logout;
+  public logOut() {
+    this.loginService.logout;
     window.location.reload();
   }
 }

@@ -52,8 +52,8 @@ export class ExperienciaComponent {
     );
   }
 
-  public onActualizarExperiencia(Experiencia: Experiencia): void {
-    this.experienciaService.actualizarExperiencia(Experiencia).subscribe(
+  public onActualizarExperiencia(experiencia: Experiencia): void {
+    this.experienciaService.actualizarExperiencia(experiencia).subscribe(
       (response: Experiencia) => {
         console.log("Actualizado");
         // console.log(response);

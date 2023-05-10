@@ -26,10 +26,10 @@
                         </a>
                     </li>
                     <li>
-                        <button *ngIf="!isLogged" class="btn btn-outline-dark" (click)="login()">Iniciar Sesión</button>
-                        <button *ngIf="isLogged" class="btn btn-outline-dark" (click)="logout()" >Cerrar Sesión</button>
-                        <!-- <div *ngIf="userLoginOn">
-                            <p>{{userData.username}}</p>
+                        <button *ngIf="!isLogged" class="btn btn-outline-dark" (click)="logIn()">Iniciar Sesión</button>
+                        <button *ngIf="isLogged" class="btn btn-outline-dark" (click)="logOut()" >Cerrar Sesión</button>
+                        <!-- <div *ngIf="isLogged">
+                            <p>{{ loginService.getUser().username }}</p>
                         </div> -->
                     </li>
                 </ul>

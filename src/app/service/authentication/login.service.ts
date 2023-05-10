@@ -16,19 +16,14 @@ export class LoginService {
      private http: HttpClient
    ) { }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   if(error.status === 0) {
-  //     console.error('Se ha producido un error', error.error);
-  //   } 
-  //   else {
-  //     console.error('Backend retornó el código de estado', error.status, error.error);
-  //   }
-  //   return throwError(() => new Error('Algo falló. Por favor intente nuevamente'));
-  // }
-
-  public generateToken(credentials: LoginReq): Observable<any> {
+  public generateToken(credentials: LoginReq){
     return this.http.post<User>(`${this.apiServerUrl}/generate-token`, credentials);
   }
+
+  public getCurrentUser(){
+    return this.http.get(`${this.apiServerUrl}/actual-usuario`);
+  }
+  
 
   //iniciamos sesión y establecemos el token en el localStorage
   public loginUser(token:any){
@@ -76,7 +71,5 @@ export class LoginService {
     return user.authorities[0].authority;
   }
 
-  public getCurrentUser(){
-    return this.http.get(`${this.apiServerUrl}/actual-usuario`);
-  }
+  
 }

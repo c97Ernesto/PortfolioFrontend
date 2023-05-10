@@ -20,4 +20,8 @@ export class PersonaService {
   public obtenerPersona(id: number): Observable<Persona> {
     return this.httpClient.get<Persona>(`${this.apiServerUrl}/persona/${id}`);
   }
+
+  public actualizarPersona(persona: Persona): Observable<Persona> {
+    return this.httpClient.put<Persona>(`${this.apiServerUrl}/persona/actualizar/${persona.id}`, persona);
+  }
 }

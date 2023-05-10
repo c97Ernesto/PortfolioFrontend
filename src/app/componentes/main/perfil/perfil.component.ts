@@ -11,7 +11,7 @@ import { PersonaService } from 'src/app/service/persona.service';
 })
 export class PerfilComponent {
   persona: Persona;
-
+  editPersona: Persona;
   isLogged = false;
 
   constructor (
@@ -32,5 +32,35 @@ export class PerfilComponent {
         alert(error.message)
       }
     )
+  }
+
+  public onActualizarPersona(persona: Persona): void {
+    this.personaService.actualizarPersona(persona).subscribe(
+      (response: Persona) => {
+        console.log("Actualizado");
+        // console.log(response);
+        this.obtenerPersona();
+      }, (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onOpenModal(persona: Persona, modo: string) {
+    const contenedor = document.getElementById('container-persona');
+    const boton = document.createElement('button');
+
+    boton.type = 'button';
+    boton.style.display = 'none';
+    boton.setAttribute('data-bs-toggle', 'modal');
+
+    if (modo === 'actualizar') {
+      this.editPersona = persona;
+      boton.setAttribute('data-bs-target', '#actualizarPersonaModal');
+    }
+    
+    contenedor.appendChild(boton);
+    boton.click();
+
   }
 }
