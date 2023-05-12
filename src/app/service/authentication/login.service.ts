@@ -9,6 +9,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class LoginService {
+
   private apiServerUrl = environment.apiBaseUrl;
   public loginStatusSubjec = new Subject<boolean>();
 
@@ -17,7 +18,7 @@ export class LoginService {
    ) { }
 
   public generateToken(credentials: LoginReq){
-    return this.http.post<User>(`${this.apiServerUrl}/generate-token`, credentials);
+    return this.http.post(`${this.apiServerUrl}/generate-token`, credentials);
   }
 
   public getCurrentUser(){

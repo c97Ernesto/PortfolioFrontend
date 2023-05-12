@@ -6,18 +6,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbar-toggler">
-                <a class="navbar-brand" href="#">
-                    <img src="../../../assets/Imagenes/laptopBoostrap-svg.svg" width="50" alt="Argentina Programa"> Argentina Programa
+                <a
+                    href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa">
+                    <img src="../../../assets/Imagenes/argentina-programa.png" width="175" 
+                        alt="Logo de Argentina programa">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="navbar-brand " href="#">
-                            <img class="logos-redes" src="../../../assets/Imagenes/instagramBoostrap-svg.svg" alt="logos redes">
+                            <img class="logos-redes" src="../../../assets/Imagenes/instagramBoostrap-svg.svg"
+                                alt="logos redes">
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">
-                            <img class="logos-redes" src="../../../assets/Imagenes/pencilBoostrap-svg.svg" alt="logos redes">
+                            <img class="logos-redes" src="../../../assets/Imagenes/linkedin-bootstrap.svg"
+                                alt="logos redes">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -26,14 +30,14 @@
                         </a>
                     </li>
                     <li>
-                        <button *ngIf="!isLogged" class="btn btn-outline-dark" (click)="logIn()">Iniciar Sesión</button>
-                        <button *ngIf="isLogged" class="btn btn-outline-dark" (click)="logOut()" >Cerrar Sesión</button>
+                        <button *ngIf="!isLoggedIn" class="btn btn-outline-dark" (click)="logIn()">Iniciar Sesión</button>
+                        <button *ngIf="isLoggedIn" class="btn btn-outline-dark" (click)="logOut()">Cerrar Sesión</button>
                         <!-- <div *ngIf="isLogged">
-                            <p>{{ loginService.getUser().username }}</p>
+                            <p>{{ user.username }}</p>
                         </div> -->
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-  </header>
+</header>

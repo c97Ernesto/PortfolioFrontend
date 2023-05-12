@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/service/authentication/login.service';
-import { User } from 'src/app/service/authentication/user';
 
 @Component({
   selector: 'app-encabezado',
   templateUrl: './encabezado.component.html',
   styleUrls: ['./encabezado.component.css']
 })
-export class EncabezadoComponent {
-  isLogged = false  
+export class EncabezadoComponent implements OnInit{
+  isLoggedIn = false  
+  //user: User;
 
   constructor(
     public loginService: LoginService,
@@ -17,7 +17,14 @@ export class EncabezadoComponent {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = this.loginService.isLoggedIn();
+    this.isLoggedIn = this.loginService.isLoggedIn();
+    //this.user = this.loginService.getUser();
+    this.loginService.loginStatusSubjec.asObservable().subscribe(
+      data => {
+        this.isLoggedIn = this.loginService.isLoggedIn();
+        //this.user = this.loginService.getUser();
+      }
+    )
   }
 
   public logIn() {
@@ -25,7 +32,7 @@ export class EncabezadoComponent {
   }
 
   public logOut() {
-    this.loginService.logout;
+    this.loginService.logout();
     window.location.reload();
   }
 }
