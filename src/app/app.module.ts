@@ -20,8 +20,7 @@ import { ProyectoComponent } from './componentes/main/proyecto/proyecto.componen
 import { SkillComponent } from './componentes/main/skill/skill.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FooterComponent } from './componentes/footer/footer.component';
-
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,19 +35,20 @@ import { FooterComponent } from './componentes/footer/footer.component';
     ProyectoComponent,
     SkillComponent,
     FooterComponent,
-
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    NgCircleProgressModule.forRoot({
-      
-    })
+    NgCircleProgressModule.forRoot({}),
   ],
-  providers: [authInterceptorProviders],
-  bootstrap: [AppComponent]
+  providers: [
+    authInterceptorProviders,
+    { provide: DatePipe, useClass: DatePipe },
+  ],
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

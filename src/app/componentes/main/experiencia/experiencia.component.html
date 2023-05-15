@@ -17,7 +17,14 @@
                             <h5 class="mb-1">{{exp?.nombre}}</h5>
                             <p class="mb-1">{{exp?.descripcion}}</p>
                             <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
-                            <p class="mb-1">{{exp?.fechaInicio}} - {{exp?.fechaFin}}</p>
+                            <div *ngIf="exp?.fechaInicio || exp?.fechaFin" class="d-flex">
+                                <p *ngIf="exp?.fechaInicio" class="mb-1" style="padding-right: 10px;">
+                                    Desde: {{exp?.fechaInicio | date: 'shortDate'}}
+                                </p>
+                                <p *ngIf="exp?.fechaFin" class="mb-1">
+                                    Hasta: {{exp?.fechaFin | date: 'shortDate'}}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="isLogged" class="d-flex align-items-start">
@@ -34,7 +41,7 @@
             </div>
             <div *ngIf="isLogged" class="col-lg-4">
                 <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-                    Agregar Experiencia
+                    Nueva Experiencia
                 </a>
             </div>
         </div>

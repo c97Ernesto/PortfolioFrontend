@@ -2,8 +2,14 @@
   <div class="container-footer">
     <p>© 2023 My Portfolio</p>
     <ul>
-      <li><i class="bi-telephone" style="padding-right: 5px;" ></i>{{persona?.telefono}}</li>
-      <li><i class="bi bi-envelope-at"  style="padding-right: 5px;"></i>{{persona?.email}}</li>
+      <li *ngIf="persona?.telefono">
+        <i class="bi-telephone" style="padding-right: 5px;" ></i>
+        {{persona?.telefono}}
+      </li>
+      <li>
+        <i class="bi bi-envelope-at"  style="padding-right: 5px;"></i>
+        {{persona?.email}}
+      </li>
     </ul>
   </div>
 </footer>

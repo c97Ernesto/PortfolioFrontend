@@ -16,7 +16,7 @@
             <div class="list-info ">
               <h5 class="mb-1">{{proyecto?.nombre}}</h5>
               <p class="mb-1">{{proyecto?.descripcion}}</p>
-              <p class="mb-1">{{proyecto?.fechaCreacion}}</p>
+              <p class="mb-1">Fecha creación de proyecto: {{proyecto?.fechaCreacion | date: 'longDate'}}</p>
               <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
             </div>
           </div>
@@ -34,7 +34,7 @@
       </div>
       <div *ngIf="isLogged" class="col-lg-4">
         <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-          Agregar Proyecto
+          Nuevo Proyecto
         </a>
       </div>
     </div>

@@ -60,6 +60,7 @@ export class ExperienciaComponent {
         // console.log(response);
         this.obtenerExperiencia();
       }, (error: HttpErrorResponse) => {
+        console.log(experiencia);
         alert(error.message);
       }
     );

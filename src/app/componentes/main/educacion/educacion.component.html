@@ -1,7 +1,7 @@
 <div class="card" id="container-educacion">
     <div class="card-body">
         <div class="d-flex">
-            <h3 class="card-title">Educacion</h3>
+            <h3 class="card-title">Educación</h3>
         </div>
         <div class="row align-items-center justify-content-between">
             <div class="list-group col-lg-8 col-md-12">
@@ -17,7 +17,14 @@
                             <h5 class="mb-1">{{educacion?.nombre}}</h5>
                             <p class="mb-1">{{educacion?.descripcion}}</p>
                             <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
-                            <p class="mb-1">{{educacion?.fechaInicio}} - {{educacion?.fechaFin}}</p>
+                            <div *ngIf="educacion?.fechaInicio || educacion?.fechaFin" class="d-flex">
+                                <p *ngIf="educacion?.fechaInicio" class="mb-1" style="padding-right: 10px;">
+                                    Desde: {{educacion?.fechaInicio | date: 'shortDate'}}
+                                </p>
+                                <p *ngIf="educacion?.fechaFin" class="mb-1">
+                                    Hasta: {{educacion?.fechaFin | date: 'shortDate'}}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="isLogged" class="d-flex align-items-start">
@@ -34,7 +41,7 @@
             </div>
             <div *ngIf="isLogged" class="col-lg-4">
                 <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-                    Agregar Estudio
+                    Nuevo Estudio
                 </a>
             </div>
         </div>
