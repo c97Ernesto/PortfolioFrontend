@@ -16,8 +16,12 @@ import { EducacionComponent } from './componentes/main/educacion/educacion.compo
 import { LoginComponent } from './page/login/login.component';
 
 import { authInterceptorProviders } from './service/authentication/auth.interceptor';
+import { ProyectoComponent } from './componentes/main/proyecto/proyecto.component';
+import { SkillComponent } from './componentes/main/skill/skill.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { FooterComponent } from './componentes/footer/footer.component';
 
-//import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +33,9 @@ import { authInterceptorProviders } from './service/authentication/auth.intercep
     EducacionComponent,
     MainComponent,
     LoginComponent,
+    ProyectoComponent,
+    SkillComponent,
+    FooterComponent,
 
     
   ],
@@ -36,7 +43,10 @@ import { authInterceptorProviders } from './service/authentication/auth.intercep
     BrowserModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgCircleProgressModule.forRoot({
+      
+    })
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,0 +1,179 @@
+<div class="card" id="container-proyecto">
+  <div class="card-body">
+    <div class="d-flex">
+      <h3 class="card-title">Proyectos</h3>
+    </div>
+    <div class="row align-items-center justify-content-between">
+      <div class="list-group col-lg-8 col-md-12">
+        <div *ngFor="let proyecto of proyectos" class="list-group-item d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <!-- <div class="logo-image-container">
+                              <a href=""><img src="{{proyecto?.imagen}}" alt="foto-de-la-proyecto" class="img-fluid rounded-circle w-60"></a>
+                           </div> -->
+            <div class="logo-image-container">
+              <img src="../../../../assets/Imagenes/calculator-bootstrap.svg">
+            </div>
+            <div class="list-info ">
+              <h5 class="mb-1">{{proyecto?.nombre}}</h5>
+              <p class="mb-1">{{proyecto?.descripcion}}</p>
+              <p class="mb-1">{{proyecto?.fechaCreacion}}</p>
+              <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
+            </div>
+          </div>
+          <div *ngIf="isLogged" class="d-flex align-items-start">
+            <button (click)="onOpenModal(proyecto, 'actualizar')" class="btn btn-secondary" data-placement="top"
+              data-original-title="Edit">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button (click)="onOpenModal(proyecto, 'eliminar')" class="btn btn-danger" data-placement="top"
+              data-original-title="Delete">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isLogged" class="col-lg-4">
+        <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
+          Agregar Proyecto
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal, Agregar Proyecto-->
+<div class="modal fade" id="agregarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Proyecto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formDeCreacionProyecto="ngForm" (ngSubmit)="onAgregarProyecto(formDeCreacionProyecto)"
+          id="formDeCreacionProyecto">
+          <div class="form-floating mb-1">
+            <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
+            <label for="nombre">Nombre del Proyecto</label>
+            <!-- <div class="alert alert-danger" role="alert">
+                            Campo obligatorio!
+                        </div> -->
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
+            <label for="descripcion">Descripcion</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="link" ngModel class="form-control" id="link">
+            <label for="link">Url del proyecto</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl" disabled>
+            <label for="imagenUrl">Url de Imagen</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="date" name="fechaCreacion" ngModel class="form-control" id="fechaCreacion">
+            <label for="fechaCreacion">Fecha de cración del proyecto</label>
+          </div>
+        </form>
+        <!-- submit no funciona. está fuera del form -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <button type="submit" form="formDeCreacionProyecto" [disabled]="!formDeCreacionProyecto.valid"
+            class="btn btn-primary">
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal, Actualizar Proyecto-->
+<div class="modal fade" id="actualizarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Proyecto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formDeActualizacionProyecto="ngForm" (ngSubmit)="onActualizarProyecto(formDeActualizacionProyecto.value)"
+          id="formDeActualizacionProyecto">
+          <div class="form-floating mb-1">
+            <input type="text" name="nombre" ngModel="{{editProyecto?.nombre}}" class="form-control" id="nombre"
+              required>
+            <label for="nombre">Nombre del Proyecto</label>
+            <!-- <div class="alert alert-danger" role="alert">
+                            Campo obligatorio!
+                        </div> -->
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="descripcion" ngModel="{{editProyecto?.descripcion}}" class="form-control"
+              id="descripcion">
+            <label for="descripcion">Descripcion</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="link" ngModel="{{editProyecto?.link}}" class="form-control" id="link">
+            <label for="link">Url del proyecto</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="text" name="imagenUrl" ngModel="{{editProyecto?.imagen}}" class="form-control" id="imagenUrl"
+              disabled>
+            <label for="imagenUrl">Url de Imagen</label>
+          </div>
+          <div class="form-floating mb-1">
+            <input type="date" name="fechaCreacion" ngModel class="form-control" id="fechaCreacion">
+            <label for="fechaCreacion">Fecha de cración del proyecto</label>
+          </div>
+
+          <input type="hidden" ngModel="{{editProyecto?.id}}" name="id" class="form-control" id="id">
+          <!-- <div class="form-floating">
+                        <label for="imagenUrl">Imagen URL</label>
+                        <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl"
+                           placeholder="Image URL" required>
+                    </div> -->
+        </form>
+        <!-- submit no funciona. está fuera del form -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <button form="formDeActualizacionProyecto" [disabled]="!formDeActualizacionProyecto.valid"
+            class="btn btn-primary">
+            Actualizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal, Eliminar Proyecto-->
+<div class="modal fade" id="eliminarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Proyecto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Seguro que se desea eliminar la Proyecto "{{deleteProyecto?.nombre}}"?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button (click)="onEliminarProyecto(deleteProyecto.id)" class="btn btn-danger"
+            data-bs-dismiss="modal">Si</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

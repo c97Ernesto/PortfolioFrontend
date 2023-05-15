@@ -1,23 +1,66 @@
+<!-- De igual manera que actualizamos la Persona, solo utilizamos un campo-->
+
 <!-- Card 1: Acerca de -->
-<div id="acerca-de">
-    <div class="card ">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <h5 class="card-title">Acerca de</h5>
-                <!-- <div *ngIf="isLogged" class="btn-edit">
-                    <a class="btn btn-light" href="#" role="button"><i class="bi bi-pencil"></i></a>
-                </div> -->
+<div class="card" id="container-acercaDe">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <h5 class="card-title">Acerca de</h5>
+            <div *ngIf="isLogged" class="btn-edit ">
+                <button (click)="onOpenModal(persona, 'actualizar')" class="btn btn-light" data-placement="top"
+                    data-original-title="Edit">
+                    <i class="bi bi-pencil"></i>
+                </button>
             </div>
-            <div>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit possimus repellendus
-                    consequuntur ab voluptates mollitia? Fugiat maxime accusamus tempora.
-                    ional content.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit possimus repellendus
-                    c
-                    ional content.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit possimus repellendus
-                    c</p>
+        </div>
+        <div>
+            <p class="card-text">{{persona?.sobreMi}}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal, Actualizar Acerca De-->
+<div class="modal fade" id="actualizarAcercaDeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar información AcercaDe</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #formDeActualizacionAcercaDe="ngForm"
+                    (ngSubmit)="onActualizarAcercaDe(formDeActualizacionAcercaDe.value)"
+                    id="formDeActualizacionAcercaDe">
+                    <div class="form-floating mb-1">
+                        <textarea class="form-control" name="sobreMi" ngModel="{{editPersona?.sobreMi}}"
+                            placeholder="Información detallada" id="sobreMi" style="height: 100px"></textarea>
+                        <label for="sobreMi">Más información sobre mí</label>
+                    </div>
+                    <input type="hidden" ngModel="{{editPersona?.id}}" name="id" class="form-control" id="id">
+                    <input type="hidden" name="nombre" ngModel="{{editPersona?.nombre}}" class="form-control"
+                        id="nombre">
+                    <input type="hidden" name="apellido" ngModel="{{editPersona?.apellido}}" class="form-control"
+                        id="apellido">
+                    <input type="hidden" name="email" ngModel="{{editPersona?.email}}" class="form-control" id="email">
+                    <input type="hidden" name="telefono" ngModel="{{editPersona?.telefono}}" class="form-control"
+                        id="telefono">
+                    <input type="hidden" name="titulo" ngModel="{{editPersona?.titulo}}" class="form-control"
+                        id="titulo">
+                    <input type="hidden" name="imagenPerfil" ngModel="{{editPersona?.imgPerfilUrl}}"
+                        class="form-control" id="imagenPerfil" disabled>
+                    <input type="hidden" name="imagenDeFondo" ngModel="{{editPersona?.imgFondo}}" class="form-control"
+                        id="imagenDeFondo" disabled>
+
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button form="formDeActualizacionAcercaDe" [disabled]="!formDeActualizacionAcercaDe.valid"
+                        class="btn btn-primary">
+                        Actualizar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

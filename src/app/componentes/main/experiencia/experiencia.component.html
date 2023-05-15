@@ -1,47 +1,47 @@
-<div id="container-experiencia">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex">
-                <h3 class="card-title">Experiencia</h3>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="list-group col-lg-8 col-md-12">
-                    <div *ngFor="let exp of experiencia"
-                        class="list-group-item d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <!-- <div class="logo-image-container">
-                                <a href=""><img src="{{exp?.imagenUrl}}" alt="foto-de-la-experiencia" class="img-fluid rounded-circle w-60"></a>
+<div class="card" id="container-experiencia">
+    <div class="card-body">
+        <div class="d-flex">
+            <h3 class="card-title">Experiencia</h3>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="list-group col-lg-8 col-md-12">
+                <div *ngFor="let exp of experiencia" class="list-group-item d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <!-- <div class="logo-image-container">
+                                <a href=""><img src="{{exp?.logo}}" alt="foto-de-la-experiencia" class="img-fluid rounded-circle w-60"></a>
                              </div> -->
-                            <div class="logo-image-container">
-                                <img src="../../../../assets/Imagenes/ig.png">
-                            </div>
-                            <div class="list-info ">
-                                <h5 class="mb-1">{{exp?.nombre}}</h5>
-                                <p class="mb-1">{{exp?.descripcion}}</p>
-                            </div>
+                        <div class="logo-image-container">
+                            <img src="../../../../assets/Imagenes/laptopBoostrap-svg.svg">
                         </div>
-                        <div *ngIf="isLogged" class="d-flex align-items-start">
-                            <a (click)="onOpenModal(exp, 'actualizar')" class="btn btn-secondary"
-                                data-placement="top" data-original-title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <a (click)="onOpenModal(exp, 'eliminar')" class="btn btn-danger" data-placement="top"
-                                data-original-title="Delete">
-                                <i class="bi bi-trash"></i>
-                            </a>
+                        <div class="list-info ">
+                            <h5 class="mb-1">{{exp?.nombre}}</h5>
+                            <p class="mb-1">{{exp?.descripcion}}</p>
+                            <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
+                            <p class="mb-1">{{exp?.fechaInicio}} - {{exp?.fechaFin}}</p>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="isLogged" class="col-lg-4">
-                    <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-                        Agregar Experiencia
-                    </a>
+                    <div *ngIf="isLogged" class="d-flex align-items-start">
+                        <button (click)="onOpenModal(exp, 'actualizar')" class="btn btn-secondary" data-placement="top"
+                            data-original-title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button (click)="onOpenModal(exp, 'eliminar')" class="btn btn-danger" data-placement="top"
+                            data-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-
+            <div *ngIf="isLogged" class="col-lg-4">
+                <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
+                    Agregar Experiencia
+                </a>
+            </div>
         </div>
+
     </div>
 </div>
+
 
 
 <!-- Modal, Agregar Experiencia-->
@@ -54,23 +54,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #formDeCreacionExperiencia="ngForm" (ngSubmit)="onAgregarExperiencia(formDeCreacionExperiencia)" id="formDeCreacionExperiencia">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required="">
+                <form #formDeCreacionExperiencia="ngForm" (ngSubmit)="onAgregarExperiencia(formDeCreacionExperiencia)"
+                    id="formDeCreacionExperiencia">
+                    <div class="form-floating mb-1">
+                        <input type="text" name="nombre" ngModel="{{editExperiencia?.nombre}}" class="form-control"
+                            id="nombre" required>
                         <label for="nombre">Nombre</label>
                         <!-- <div class="alert alert-danger" role="alert">
                             Campo obligatorio!
                         </div> -->
                     </div>
-                    <div class="form-floating">
-                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
+                    <input type="hidden" ngModel="{{editExperiencia?.id}}" name="id" class="form-control" id="id">
+                    <div class="form-floating mb-1">
+                        <input type="text" name="descripcion" ngModel="{{editExperiencia?.descripcion}}"
+                            class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
-                    <!-- <div class="form-floating">
-                        <label for="imagenUrl">Imagen URL</label>
-                        <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
-                           placeholder="Image URL" required>
-                    </div> -->
+                    <div class="form-floating mb-1">
+                        <input type="date" name="fechaInicio" ngModel="{{editExperiencia?.fechaInicio}}"
+                            class="form-control" id="fechaInicioExperiencia">
+                        <label for="fechaInicio">Fecha de inicio de trabajo</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="date" name="fechaFin" ngModel="{{editExperiencia?.fechaFin}}" class="form-control"
+                            id="fechaFin">
+                        <label for="fechaFin">Fecha de finalización de trabajo</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" name="logo" ngModel="{{editExperiencia?.logo}}" class="form-control"
+                            id="logo" disabled>
+                        <label for="logo">Logo</label>
+                    </div>
                 </form>
                 <!-- submit no funciona. está fuera del form -->
                 <div class="modal-footer">
@@ -97,32 +111,46 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #formDeActualizacionExperiencia="ngForm" (ngSubmit)="onActualizarExperiencia(formDeActualizacionExperiencia.value)"
+                <form #formDeActualizacionExperiencia="ngForm"
+                    (ngSubmit)="onActualizarExperiencia(formDeActualizacionExperiencia.value)"
                     id="formDeActualizacionExperiencia">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
+                    <div class="form-floating mb-1">
+                        <input type="text" name="nombre" ngModel="{{editExperiencia?.nombre}}" class="form-control"
+                            id="nombre" required>
                         <label for="nombre">Nombre</label>
                         <!-- <div class="alert alert-danger" role="alert">
                             Campo obligatorio!
                         </div> -->
                     </div>
                     <input type="hidden" ngModel="{{editExperiencia?.id}}" name="id" class="form-control" id="id">
-                    <div class="form-floating">
-                        <input type="text" name="descripcion" ngModel class="form-control" id="descripcion">
+                    <div class="form-floating mb-1">
+                        <input type="text" name="descripcion" ngModel="{{editExperiencia?.descripcion}}"
+                            class="form-control" id="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
-                    <!-- <div class="form-floating">
-                        <label for="imagenUrl">Imagen URL</label>
-                        <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl"
-                           placeholder="Image URL" required>
-                    </div> -->
+                    <div class="form-floating mb-1">
+                        <input type="date" name="fechaInicio" ngModel="{{editExperiencia?.fechaInicio}}"
+                            class="form-control" id="fechaInicioExperiencia">
+                        <label for="fechaInicio">Fecha de inicio de trabajo</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="date" name="fechaFin" ngModel="{{editExperiencia?.fechaFin}}" class="form-control"
+                            id="fechaFin">
+                        <label for="fechaFin">Fecha de finalización de trabajo</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" name="logo" ngModel="{{editExperiencia?.logo}}" class="form-control"
+                            id="logo" disabled>
+                        <label for="logo">Logo</label>
+                    </div>
                 </form>
                 <!-- submit no funciona. está fuera del form -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button form="formDeActualizacionExperiencia" [disabled]="!formDeActualizacionExperiencia.valid" class="btn btn-primary">
+                    <button form="formDeActualizacionExperiencia" [disabled]="!formDeActualizacionExperiencia.valid"
+                        class="btn btn-primary">
                         Actualizar
                     </button>
                 </div>

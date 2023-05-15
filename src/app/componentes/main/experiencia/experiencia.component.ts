@@ -5,6 +5,7 @@ import { Experiencia } from 'src/app/model/experiencia';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
 
+
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
