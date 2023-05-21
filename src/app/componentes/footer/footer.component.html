@@ -1,12 +1,12 @@
 <footer>
   <div class="container-footer">
     <p>© 2023 My Portfolio</p>
-    <ul>
+    <ul *ngIf="persona?.telefono || persona?.email" >
       <li *ngIf="persona?.telefono">
         <i class="bi-telephone" style="padding-right: 5px;" ></i>
         {{persona?.telefono}}
       </li>
-      <li>
+      <li *ngIf="persona?.email">
         <i class="bi bi-envelope-at"  style="padding-right: 5px;"></i>
         {{persona?.email}}
       </li>
