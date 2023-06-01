@@ -1,5 +1,4 @@
 export const environment = {
-   production: false,
-   apiBaseUrl: 'https://portfoliobackend-wc8a.onrender.com'
+   apiBaseUrl: 'https://portfolio-backend-7u82.onrender.com'
    //apiBaseUrl: 'http://localhost:8080'
 };
