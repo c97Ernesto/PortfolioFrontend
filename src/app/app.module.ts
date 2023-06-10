@@ -21,6 +21,7 @@ import { SkillComponent } from './componentes/main/skill/skill.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { DatePipe } from '@angular/common';
+import { PruebaModalFormComponent } from './componentes/main/prueba-modal-form/prueba-modal-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DatePipe } from '@angular/common';
     ProyectoComponent,
     SkillComponent,
     FooterComponent,
+    PruebaModalFormComponent,
   ],
   imports: [
     BrowserModule,

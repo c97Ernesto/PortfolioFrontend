@@ -29,7 +29,7 @@ export class AcercaDeComponent{
       (data: Persona) => {
         this.persona = data;
       }, (error: HttpErrorResponse) => {
-        alert(error.message)
+        console.log(error.message)
       }
     )
   }
@@ -41,7 +41,7 @@ export class AcercaDeComponent{
         console.log(response);
         this.obtenerPersona();
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

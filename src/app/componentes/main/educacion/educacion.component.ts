@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Educacion } from 'src/app/model/educacion';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { EducacionService } from 'src/app/service/educacion.service';
@@ -10,72 +10,133 @@ import { EducacionService } from 'src/app/service/educacion.service';
 @Component({
   selector: 'app-educacion',
   templateUrl: './educacion.component.html',
-  styleUrls: ['./educacion.component.css']
+  styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
   estudios: Educacion[] = [];
-  editEducacion: Educacion;
-  deleteEducacion: Educacion;
 
   isLogged = false;
 
   constructor(
     private estudioService: EducacionService,
     private loginService: LoginService,
-  ){ }
+    private fb: FormBuilder
+  ) {  }
+
+  educationForm = this.fb.group({
+    id: [],
+    nombre: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    fechaInicio: [],
+    fechaFin: [],
+    logo: [],
+  });
+
+  get nombre() { return this.educationForm.get('nombre'); }
+  get descripcion() { return this.educationForm.get('descripcion'); }
 
   ngOnInit(): void {
     this.obtenerEstudios();
     this.isLogged = this.loginService.isLoggedIn();
   }
 
+  
+
   public obtenerEstudios(): void {
     this.estudioService.obtenerEducacion().subscribe(
       (response: Educacion[]) => {
         this.estudios = response;
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-  
-
-  public onAgregarEducacion(formulario: NgForm): void {
-    // console.log(formulario);
-    // console.log(formulario.value)
-    this.estudioService.agregarEducacion(formulario.value).subscribe(
-      (response: Educacion) => {
-        console.log(response);
-        this.obtenerEstudios();
-        formulario.reset();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-        formulario.reset();
-      }
-    );
-  }
-
-  public onActualizarEducacion(educacion: Educacion): void {
-    this.estudioService.actualizarEducacion(educacion).subscribe(
-      (response: Educacion) => {
-        console.log("Actualizado");
-        // console.log(response);
-        this.obtenerEstudios();
-      }, (error: HttpErrorResponse) => {
+      },
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
   }
 
-  public onEliminarEducacion(id: number): void {
-    this.estudioService.eliminarEducacion(id).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.obtenerEstudios();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  public onAgregarEducacion(): void {
+    if (this.educationForm.valid) {
+      const educacion = new Educacion(
+        this.educationForm.value.id,
+        this.educationForm.value.nombre,
+        this.educationForm.value.descripcion,
+        this.educationForm.value.fechaInicio,
+        this.educationForm.value.fechaFin,
+        this.educationForm.value.logo
+      );
+
+      console.log(educacion);
+
+      this.estudioService.agregarEducacion(educacion).subscribe(
+        (response: Educacion) => {
+          console.log(response);
+          this.obtenerEstudios();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else {
+      console.log(this.educationForm);
+    }
+  }
+
+  public onActualizarEducacion(): void {
+    if (this.educationForm.valid) {
+      const educacion = new Educacion(
+        this.educationForm.value.id,
+        this.educationForm.value.nombre,
+        this.educationForm.value.descripcion,
+        this.educationForm.value.fechaInicio,
+        this.educationForm.value.fechaFin,
+        this.educationForm.value.logo
+      );
+
+      this.estudioService.actualizarEducacion(educacion).subscribe(
+        (response: Educacion) => {
+          console.log('Actualizado');
+          // console.log(response);
+          this.obtenerEstudios();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+
+      console.log(educacion);
+    } else {
+
+    }
+
+    this.resetForm();
+  }
+
+  public onEliminarEducacion(): void {
+    this.estudioService
+      .eliminarEducacion(this.educationForm.value.id)
+      .subscribe(
+        (response: void) => {
+          console.log(response);
+          this.obtenerEstudios();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+  }
+
+  private setValueForm(educacion: Educacion) {
+    this.educationForm.setValue({
+      id: educacion.id,
+      nombre: educacion.nombre,
+      descripcion: educacion.descripcion,
+      fechaInicio: educacion.fechaInicio,
+      fechaFin: educacion.fechaFin,
+      logo: educacion.logo,
+    });
+  }
+
+  public resetForm(){
+    this.educationForm.reset();
   }
 
   public onOpenModal(educacion: Educacion, modo: string) {
@@ -88,20 +149,18 @@ export class EducacionComponent implements OnInit {
 
     if (modo === 'agregar') {
       boton.setAttribute('data-bs-target', '#agregarEducacionModal');
+      this.resetForm();
     }
     if (modo === 'actualizar') {
-      this.editEducacion = educacion;
+      this.setValueForm(educacion);
       boton.setAttribute('data-bs-target', '#actualizarEducacionModal');
     }
     if (modo === 'eliminar') {
-      this.deleteEducacion = educacion;
+      this.setValueForm(educacion); //seteo los valores del formulario
       boton.setAttribute('data-bs-target', '#eliminarEducacionModal');
     }
 
     contenedor.appendChild(boton);
     boton.click();
-
   }
-
-
 }

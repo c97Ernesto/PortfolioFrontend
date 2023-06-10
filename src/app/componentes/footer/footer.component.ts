@@ -24,7 +24,7 @@ export class FooterComponent {
       (data: Persona) => {
         this.persona = data;
       }, (error: HttpErrorResponse) => {
-        alert(error.message)
+        console.log(error.message)
       }
     )
   }

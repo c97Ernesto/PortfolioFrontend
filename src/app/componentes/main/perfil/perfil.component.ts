@@ -29,7 +29,7 @@ export class PerfilComponent {
       (data: Persona) => {
         this.persona = data;
       }, (error: HttpErrorResponse) => {
-        alert(error.message)
+        console.log(error.message)
       }
     )
   }
