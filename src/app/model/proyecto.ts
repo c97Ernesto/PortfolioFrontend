@@ -7,7 +7,8 @@ export class Proyecto {
 	imagen: string;
 	fechaCreacion: string;
 
-  constructor (nombre: string, descripcion: string, link: string, imagen: string, fechaCreacion: string) {
+  constructor (id: number, nombre: string, descripcion: string, link: string, imagen: string, fechaCreacion: string) {
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.link = link;

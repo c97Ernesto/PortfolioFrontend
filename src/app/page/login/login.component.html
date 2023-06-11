@@ -6,17 +6,21 @@
           <div class="panel-heading">
             <h3 class="pt-3 font-weight-bold">Login</h3>
           </div>
-          
+
           <div class="panel-body p-3">
             <form [formGroup]="loginForm">
               <div class="form-group pt-3">
+
                 <div class="input-field">
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="username" type="text" placeholder="Username">
+                  <input class="" formControlName="username" type="text" placeholder="Username" required>
                 </div>
                 <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger">
                   <div *ngIf="username.errors?.['required']">
-                    El usuario es requerido
+                    Ingresar un nombre de usuario.
+                  </div>
+                  <div *ngIf="username.errors?.['minlength']">
+                    Como mínimo debe tener 4 caracteres.
                   </div>
                 </div>
 
@@ -29,12 +33,11 @@
                     <div *ngIf="password.errors?.['required']">
                       La contraseña es requerida
                     </div>
+                    <div *ngIf="password.errors?.['minlength']">
+                      Como mínimo debe tener 4 caracteres.
+                    </div>
                   </div>
                 </div>
-
-                <!-- <div class="form-inline fr mt-4">
-                <a id="forget" class="font-weight-bold">Olvidé mi contraseña</a>
-                </div> -->
 
                 <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
               </div>

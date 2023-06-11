@@ -9,8 +9,9 @@ export class Persona {
     imgPerfilUrl: string;
     imgFondo: string;
 
-    constructor(nombre: string, apellido: string, titulo: string, sobreMi: string, telefono: string,
+    constructor(id: number, nombre: string, apellido: string, titulo: string, sobreMi: string, telefono: string,
         email: string, imgPerfilUrl: string, imgFondo: string) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;

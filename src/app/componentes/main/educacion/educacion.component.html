@@ -61,30 +61,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="educationForm" (ngSubmit)="onAgregarEducacion()" id="formDeCreacionEducacion">
+                <form [formGroup]="educationForm" (ngSubmit)="onAgregarEducacion()" 
+                id="formDeCreacionEducacion">
+
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="nombre" class="form-control" id="nombre" [ngClass]="">
+                        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                        [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
                         <label for="nombre">Nombre</label>
                         <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
                             <div *ngIf="nombre.errors?.['required']" >
                                 El nombre es obligatorio.
                             </div>
-                            <!-- <div *ngIf="nombre.errors?.['minlength']">
-                                El campo debe tener al menor 2 letras.
-                            </div> -->
                         </div>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
+                        <input type="text" formControlName="descripcion" class="form-control form-control" id="descripcion"
+                        [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched,'is-valid':!descripcion?.errors && descripcion?.touched}">
                         <label for="descripcion">Descripcion</label>
                         <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                             <div *ngIf="descripcion.errors?.['required']" >
                                 La descripción es obligatoria.
                             </div>
-                            <!-- <div *ngIf="nombre.errors?.['minlength']">
-                                El campo debe tener al menor 2 letras.
-                            </div> -->
                         </div>
                     </div>
 
@@ -101,15 +99,16 @@
                         <input type="text" formControlName="logo" class="form-control" id="logo">
                         <label for="logo">Logo de la institución</label>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <button type="submit" [disabled]="!educationForm.valid" class="btn btn-primary">
-                            Agregar
-                        </button>
-                    </div>
+                    
                 </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button form="formDeCreacionEducacion" [disabled]="!educationForm.valid" class="btn btn-primary">
+                        Agregar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -128,28 +127,24 @@
                 <form [formGroup]="educationForm" (ngSubmit)="onActualizarEducacion()"
                     id="formDeActualizacionEducacion">
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="nombre" class="form-control" id="nombre" [ngClass]="">
+                        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                        [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
                         <label for="nombre">Nombre</label>
                         <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
                             <div *ngIf="nombre.errors?.['required']" >
                                 El nombre es obligatorio.
                             </div>
-                            <!-- <div *ngIf="nombre.errors?.['minlength']">
-                                El campo debe tener al menor 2 letras.
-                            </div> -->
                         </div>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
+                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion"
+                        [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched,'is-valid':!descripcion?.errors && descripcion?.touched}">
                         <label for="descripcion">Descripcion</label>
                         <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                             <div *ngIf="descripcion.errors?.['required']" >
                                 La descripción es obligatoria.
                             </div>
-                            <!-- <div *ngIf="nombre.errors?.['minlength']">
-                                El campo debe tener al menor 2 letras.
-                            </div> -->
                         </div>
                     </div>
 
@@ -166,16 +161,17 @@
                         <input type="text" formControlName="logo" class="form-control" id="logo">
                         <label for="logo">Logo</label>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <button type="submit" [disabled]="!educationForm.valid" class="btn btn-primary">
-                            Agregar
-                        </button>
-                    </div>
+                    
                 </form>
                 <!-- submit no funciona. está fuera del form -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button form="formDeActualizacionEducacion" [disabled]="!educationForm.valid" class="btn btn-primary" data-bs-dismiss="modal">
+                        Actualizar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -193,7 +189,7 @@
             </div>
 
             <div class="modal-body">
-                <p>Seguro que se desea eliminar la educacíon "{{educationForm.value.nombre}}"</p>
+                <p>Seguro que se desea eliminar la educacíon "{{educationForm.value.nombre}}" ?</p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <button (click)="onEliminarEducacion()" class="btn btn-danger" data-bs-dismiss="modal">Si</button>

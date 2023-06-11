@@ -1,28 +1,42 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Experiencia } from 'src/app/model/experiencia';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
-
+//Con FormGroup, indentificamos el formDeCreacion y todo su contenido
+//FormBuilder, directiva para formar un grupo de componentes que va dentro del form
 
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.css']
+  styleUrls: ['./experiencia.component.css'],
 })
-export class ExperienciaComponent {
-  experiencia: Experiencia[] = [];
-  editExperiencia: Experiencia;
-  deleteExperiencia: Experiencia;
+export class ExperienciaComponent implements OnInit {
 
+  experiencia: Experiencia[] = [];
   isLogged = false;
 
   constructor(
     private experienciaService: ExperienciaService,
-    private loginService: LoginService
-  ){ }
+    private loginService: LoginService,
+    private fb: FormBuilder
+  ) {  }
 
+  experienciaForm = this.fb.group({
+    id: [],
+    nombre: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    fechaInicio: [],
+    fechaFin: [],
+    logo: [],
+  });
+
+
+  get nombre() { return this.experienciaForm.get('nombre'); }
+  get descripcion() { return this.experienciaForm.get('descripcion'); }
+
+  
   ngOnInit(): void {
     this.obtenerExperiencia();
     this.isLogged = this.loginService.isLoggedIn();
@@ -32,49 +46,97 @@ export class ExperienciaComponent {
     this.experienciaService.obtenerExperiencia().subscribe(
       (response: Experiencia[]) => {
         this.experiencia = response;
-      }, (error: HttpErrorResponse) => {
+      },
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
   }
 
-  public onAgregarExperiencia(formulario: NgForm): void {
-    // console.log(formulario);
-    // console.log(formulario.value)
-    this.experienciaService.agregarExperiencia(formulario.value).subscribe(
-      (response: Experiencia) => {
-        console.log(response);
-        this.obtenerExperiencia();
-        formulario.reset();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-        formulario.reset();
-      }
-    );
+  public onAgregarExperiencia(): void {
+    if (this.experienciaForm.valid) {
+      const experiencia = new Experiencia(
+        this.experienciaForm.value.id,
+        this.experienciaForm.value.nombre,
+        this.experienciaForm.value.descripcion,
+        this.experienciaForm.value.fechaInicio,
+        this.experienciaForm.value.fechaFin,
+        this.experienciaForm.value.logo
+      );
+
+      console.log(experiencia);
+
+      this.experienciaService.agregarExperiencia(experiencia).subscribe(
+        (response: Experiencia) => {
+          console.log(response);
+          this.obtenerExperiencia();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else {
+      console.log(this.experienciaForm);
+    }
   }
 
-  public onActualizarExperiencia(experiencia: Experiencia): void {
-    this.experienciaService.actualizarExperiencia(experiencia).subscribe(
-      (response: Experiencia) => {
-        console.log("Actualizado");
-        // console.log(response);
-        this.obtenerExperiencia();
-      }, (error: HttpErrorResponse) => {
-        console.log(experiencia);
-        alert(error.message);
-      }
-    );
+  public onActualizarExperiencia(): void {
+    if (this.experienciaForm.valid) {
+      const experiencia = new Experiencia(
+        this.experienciaForm.value.id,
+        this.experienciaForm.value.nombre,
+        this.experienciaForm.value.descripcion,
+        this.experienciaForm.value.fechaInicio,
+        this.experienciaForm.value.fechaFin,
+        this.experienciaForm.value.logo
+      );
+
+      this.experienciaService.actualizarExperiencia(experiencia).subscribe(
+        (response: Experiencia) => {
+          console.log('Actualizado');
+          // console.log(response);
+          this.obtenerExperiencia();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+
+      console.log(Experiencia);
+    } else {
+
+    }
+
+    this.resetForm();
   }
 
-  public onEliminarExperiencia(id: number): void {
-    this.experienciaService.eliminarExperiencia(id).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.obtenerExperiencia();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  public onEliminarExperiencia(): void {
+    this.experienciaService
+      .eliminarExperiencia(this.experienciaForm.value.id)
+      .subscribe(
+        (response: void) => {
+          console.log(response);
+          this.obtenerExperiencia();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+  }
+
+  private setValueForm(Experiencia: Experiencia) {
+    this.experienciaForm.setValue({
+      id: Experiencia.id,
+      nombre: Experiencia.nombre,
+      descripcion: Experiencia.descripcion,
+      fechaInicio: Experiencia.fechaInicio,
+      fechaFin: Experiencia.fechaFin,
+      logo: Experiencia.logo,
+    });
+  }
+
+  public resetForm(){
+    this.experienciaForm.reset();
   }
 
   public onOpenModal(experiencia: Experiencia, modo: string) {
@@ -87,21 +149,18 @@ export class ExperienciaComponent {
 
     if (modo === 'agregar') {
       boton.setAttribute('data-bs-target', '#agregarExperienciaModal');
+      this.resetForm();
     }
     if (modo === 'actualizar') {
-      this.editExperiencia = experiencia;
+      this.setValueForm(experiencia);
       boton.setAttribute('data-bs-target', '#actualizarExperienciaModal');
     }
     if (modo === 'eliminar') {
-      this.deleteExperiencia = experiencia;
+      this.setValueForm(experiencia); //seteo los valores del formulario
       boton.setAttribute('data-bs-target', '#eliminarExperienciaModal');
     }
 
     contenedor.appendChild(boton);
     boton.click();
-
   }
-
-
 }
-

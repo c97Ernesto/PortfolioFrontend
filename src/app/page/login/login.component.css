@@ -3,7 +3,6 @@
   margin-bottom: 10px;
 }
 
-
 a:hover {
   text-decoration: none;
 }
@@ -36,11 +35,6 @@ a:hover {
   color: #4343ff;
 }
 
-.input-field.error {
-  border: 1px solid red;
-  color: red;
-}
-
 input[type='text'],
 input[type='password'] {
   border:none;
@@ -48,3 +42,4 @@ input[type='password'] {
   box-shadow: none;
   width: 100%;
 }
+

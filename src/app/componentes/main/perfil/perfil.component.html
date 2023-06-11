@@ -36,57 +36,80 @@ personal), y la información del "footer" (email y teléfono)-->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #formDeActualizacionPersona="ngForm"
-                    (ngSubmit)="onActualizarPersona(formDeActualizacionPersona.value)" id="formDeActualizacionPersona">
-                    <input type="hidden" ngModel="{{editPersona?.id}}" name="id" class="form-control" id="id">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="nombre" ngModel="{{editPersona?.nombre}}"
-                            id="nombre" required>
+                <form [formGroup]="formPerfil" (ngSubmit)="onActualizarPersona()" id="formDeActualizacionPersona">
+                    <!-- <input type="hidden" formControlName="id" class="form-control" id="id"> -->
+
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="nombre" class="form-control" id="nombre" 
+                        [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
                         <label for="nombre">Nombre</label>
-                        <!-- <div class="alert alert-danger" role="alert">
-                            Campo obligatorio!
-                        </div> -->
+                        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+                            <div *ngIf="nombre.errors?.['required']">
+                                El nombre es obligatorio.
+                            </div>
+                            <div *ngIf="nombre.errors?.['minlength']">
+                                El nombre debe tener al menor 2 letras.
+                            </div>
+                            <div *ngIf="nombre.errors?.['pattern']">
+                                El nombre no puede contener números.
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="apellido" ngModel="{{editPersona?.apellido}}"
-                            id="apellido" required>
+
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="apellido" class="form-control" id="apellido"
+                        [ngClass]="{'is-invalid':apellido?.errors && apellido?.touched,'is-valid':!apellido?.errors && apellido?.touched}">
                         <label for="apellido">Apellido</label>
-                        <!-- <div class="alert alert-danger" role="alert">
-                            Campo obligatorio!
-                        </div> -->
+                        <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
+                            class="text-danger mb-3">
+                            <div *ngIf="apellido.errors?.['required']">
+                                El apellido es obligatorio.
+                            </div>
+                            <div *ngIf="apellido.errors?.['minlength']">
+                                El apellido debe tener al menor 2 letras.
+                            </div>
+                            <div *ngIf="apellido.errors?.['pattern']">
+                                El apellido no puede contener números.
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-floating mb-1">
-                        <input class="form-control" type="text" name="email" ngModel="{{editPersona?.email}}"
-                            id="email">
+                        <input type="email" formControlName="email" class="form-control" id="email"
+                        [ngClass]="{'is-invalid':email?.errors && email?.dirty,'is-valid':!email?.errors && email?.dirty}">
                         <label for="email">Email</label>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger mb-3">
+                            <div *ngIf="email.errors?.['email']">
+                                Formato de email inválido.
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-floating mb-1">
-                        <input class="form-control" type="text" name="telefono" ngModel="{{editPersona?.telefono}}"
-                            id="telefono">
-                        <label for="telefono">Teléfono</label>
+                        <input type="text" formControlName="telefono" class="form-control" id="telefono">
+                        <label for="telefono">Telefono</label>
                     </div>
+
                     <div class="form-floating mb-1">
-                        <input class="form-control" type="text" name="titulo" ngModel="{{editPersona?.titulo}}"
-                            id="titulo">
+                        <input type="text" formControlName="titulo" class="form-control" id="titulo">
                         <label for="titulo">Título</label>
                     </div>
+
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control" name="imagenPerfil"
-                            ngModel="{{editPersona?.imgPerfilUrl}}" id="imagenPerfil" disabled>
-                        <label for="imagenPerfil">Url de imagen de perfil</label>
+                        <input type="text" formControlName="imgPerfilUrl" class="form-control" id="imgPerfilUrl">
+                        <label for="imgPerfilUrl">Url de imagen de perfil</label>
                     </div>
+
                     <div class="form-floating mb-1">
-                        <input type="text" name="imagenDeFondo" ngModel="{{editPersona?.imgFondo}}" class="form-control"
-                            id="imagenDeFondo" disabled>
-                        <label for="imagenDeFondo">Url de imagen de fondo</label>
+                        <input type="text" formControlName="imgFondo" class="form-control" id="imgFondo">
+                        <label for="imgFondo">Url de imagen de fondo</label>
                     </div>
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button form="formDeActualizacionPersona" [disabled]="!formDeActualizacionPersona.valid"
-                        class="btn btn-primary">
+                    <button form="formDeActualizacionPersona" [disabled]="!formPerfil.valid" class="btn btn-primary">
                         Actualizar
                     </button>
                 </div>

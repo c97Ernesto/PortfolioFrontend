@@ -23,19 +23,15 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+    username: ['', [Validators.required, Validators.minLength(4)]],
+    password: ['', [Validators.required, Validators.minLength(4)]],
   });
 
   ngOnInit(): void {}
 
-  get username() {
-    return this.loginForm.controls.username;
-  }
+  get username() { return this.loginForm.controls.username; }
 
-  get password() {
-    return this.loginForm.controls.password;
-  }
+  get password() { return this.loginForm.controls.password; }
 
   public onSubmit() {
     if (this.loginForm.valid) {
@@ -59,9 +55,11 @@ export class LoginComponent implements OnInit {
             });
           },
           (error) => {
-            alert('Detalles inválidos, vuelve a intentar!!');
+            alert('Usuario o Contraseña incorrectos');
           }
         );
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }

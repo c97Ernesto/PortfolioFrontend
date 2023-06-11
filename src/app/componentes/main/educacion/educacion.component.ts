@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Educacion } from 'src/app/model/educacion';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { EducacionService } from 'src/app/service/educacion.service';
@@ -13,8 +13,8 @@ import { EducacionService } from 'src/app/service/educacion.service';
   styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
-  estudios: Educacion[] = [];
 
+  estudios: Educacion[] = [];
   isLogged = false;
 
   constructor(
@@ -32,15 +32,15 @@ export class EducacionComponent implements OnInit {
     logo: [],
   });
 
+
   get nombre() { return this.educationForm.get('nombre'); }
   get descripcion() { return this.educationForm.get('descripcion'); }
 
+  
   ngOnInit(): void {
     this.obtenerEstudios();
     this.isLogged = this.loginService.isLoggedIn();
   }
-
-  
 
   public obtenerEstudios(): void {
     this.estudioService.obtenerEducacion().subscribe(
@@ -76,7 +76,7 @@ export class EducacionComponent implements OnInit {
         }
       );
     } else {
-      console.log(this.educationForm);
+      this.educationForm.markAllAsTouched();
     }
   }
 
