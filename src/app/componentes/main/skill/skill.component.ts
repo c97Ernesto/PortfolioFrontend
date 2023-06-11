@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from 'src/app/model/skill';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { SkillService } from 'src/app/service/skill.service';
@@ -13,15 +13,25 @@ import { SkillService } from 'src/app/service/skill.service';
 export class SkillComponent {
 
   skills: Skill[] = [];
-  editSkill: Skill;
-  deleteSkill: Skill;
+
+  formSkill: FormGroup;
 
   isLogged = false;
 
   constructor(
     private skillService: SkillService,
-    private loginService: LoginService
-  ){ }
+    private loginService: LoginService,
+    private fb: FormBuilder
+  ){ 
+    this.formSkill = this.fb.group({
+      id: [],
+      nombre: ['',[Validators.required]],
+      porcentajeHabilidad: ['',[Validators.required, Validators.min(1), Validators.max(100)]]
+    });
+  }
+
+  get nombre() {return this.formSkill.get('nombre')}
+  get porcentajeHabilidad() {return this.formSkill.get('porcentajeHabilidad')}
 
   ngOnInit(): void {
     this.obtenerSkill();
@@ -38,35 +48,45 @@ export class SkillComponent {
     );
   }
 
-  public onAgregarSkill(formulario: NgForm): void {
-    // console.log(formulario);
-    // console.log(formulario.value)
-    this.skillService.agregarSkill(formulario.value).subscribe(
-      (response: Skill) => {
-        console.log(response);
-        this.obtenerSkill();
-        formulario.reset();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-        formulario.reset();
-      }
-    );
+  public onAgregarSkill(): void {
+    if (this.formSkill.valid){
+      // instanciar fuera del if
+      const skill = new Skill(this.formSkill.value.id, this.formSkill.value.nombre, this.formSkill.value.porcentajeHabilidad);
+      this.skillService.agregarSkill(skill).subscribe(
+        (response: Skill) => {
+          console.log(response);
+          this.obtenerSkill();
+        }, (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else {
+      this.formSkill.markAllAsTouched();
+    }
+    this.resetForm();
   }
 
-  public onActualizarSkill(skill: Skill): void {
-    this.skillService.actualizarSkill(skill).subscribe(
-      (response: Skill) => {
-        console.log("Actualizado");
-        // console.log(response);
-        this.obtenerSkill();
-      }, (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  public onActualizarSkill(): void {
+    if (this.formSkill.valid) {
+      // instanciar fuera del if
+      const skill = new Skill(this.formSkill.value.id, this.formSkill.value.nombre, this.formSkill.value.porcentajeHabilidad);
+      this.skillService.actualizarSkill(skill).subscribe(
+        (response: Skill) => {
+          console.log("Actualizado");
+          // console.log(response);
+          this.obtenerSkill();
+        }, (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else {
+      this.formSkill.markAllAsTouched();
+    }
+    this.resetForm();
   }
 
-  public onEliminarSkill(id: number): void {
-    this.skillService.eliminarSkill(id).subscribe(
+  public onEliminarSkill(): void {
+    this.skillService.eliminarSkill(this.formSkill.value.id).subscribe(
       (response: void) => {
         console.log(response);
         this.obtenerSkill();
@@ -74,6 +94,18 @@ export class SkillComponent {
         alert(error.message);
       }
     );
+  }
+
+  private setValueForm(skill: Skill){
+    this.formSkill.setValue({
+      id: skill.id,
+      nombre: skill.nombre,
+      porcentajeHabilidad: skill.porcentaje,
+    })
+  }
+
+  public resetForm(){
+    this.formSkill.reset();
   }
 
   public onOpenModal(skill: Skill, modo: string) {
@@ -86,19 +118,20 @@ export class SkillComponent {
 
     if (modo === 'agregar') {
       boton.setAttribute('data-bs-target', '#agregarSkillModal');
+      this.resetForm();
     }
     if (modo === 'actualizar') {
-      this.editSkill = skill;
+      this.setValueForm(skill);
       boton.setAttribute('data-bs-target', '#actualizarSkillModal');
     }
     if (modo === 'eliminar') {
-      this.deleteSkill = skill;
+      this.setValueForm(skill);
       boton.setAttribute('data-bs-target', '#eliminarSkillModal');
     }
 
     contenedor.appendChild(boton);
     boton.click();
-
   }
+
 
 }

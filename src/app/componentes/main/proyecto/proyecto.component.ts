@@ -8,32 +8,38 @@ import { ProyectoService } from 'src/app/service/proyecto.service';
 @Component({
   selector: 'app-proyecto',
   templateUrl: './proyecto.component.html',
-  styleUrls: ['./proyecto.component.css']
+  styleUrls: ['./proyecto.component.css'],
 })
 export class ProyectoComponent {
-proyectos: Proyecto[] = [];
-proyecto: Proyecto;
+  proyectos: Proyecto[] = [];
+  proyecto: Proyecto;
   isLogged = false;
 
   formProyecto: FormGroup;
 
   // Probar cambiar tipo de instanciación
-  constructor(private proyectoService: ProyectoService, private loginService: LoginService, private fb: FormBuilder) { 
+  constructor(
+    private proyectoService: ProyectoService,
+    private loginService: LoginService,
+    private fb: FormBuilder
+  ) {
     this.formProyecto = this.fb.group({
       id: [],
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       linkProyecto: [],
       imagenProyecto: [],
-      fechaCreacionProyecto: [],      
+      fechaCreacionProyecto: [],
     });
   }
 
+  get nombre() {
+    return this.formProyecto.get('nombre');
+  }
+  get descripcion() {
+    return this.formProyecto.get('descripcion');
+  }
 
-  get nombre() { return this.formProyecto.get('nombre'); }
-  get descripcion() { return this.formProyecto.get('descripcion'); }
-
-  
   ngOnInit(): void {
     this.obtenerProyecto();
     this.isLogged = this.loginService.isLoggedIn();
@@ -60,9 +66,7 @@ proyecto: Proyecto;
         this.formProyecto.value.imagenProyecto,
         this.formProyecto.value.fechaCreacionProyecto
       );
-
       console.log(proyecto);
-
       this.proyectoService.agregarProyecto(proyecto).subscribe(
         (response: Proyecto) => {
           console.log(response);
@@ -72,10 +76,10 @@ proyecto: Proyecto;
           alert(error.message);
         }
       );
+
     } else {
       console.log(this.formProyecto);
     }
-
     this.resetForm();
   }
 
@@ -89,7 +93,6 @@ proyecto: Proyecto;
         this.formProyecto.value.imagenProyecto,
         this.formProyecto.value.fechaCreacionProyecto
       );
-
       this.proyectoService.actualizarProyecto(proyecto).subscribe(
         (response: Proyecto) => {
           console.log('Actualizado');
@@ -100,27 +103,23 @@ proyecto: Proyecto;
           alert(error.message);
         }
       );
-
-      console.log(proyecto);
+      
     } else {
-
+      this.formProyecto.markAllAsTouched;
     }
-
     this.resetForm();
   }
 
   public onEliminarProyecto(): void {
-    this.proyectoService
-      .eliminarProyecto(this.formProyecto.value.id)
-      .subscribe(
-        (response: void) => {
-          console.log(response);
-          this.obtenerProyecto();
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
+    this.proyectoService.eliminarProyecto(this.formProyecto.value.id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.obtenerProyecto();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   private setValueForm(proyecto: Proyecto) {
@@ -130,11 +129,11 @@ proyecto: Proyecto;
       descripcion: proyecto.descripcion,
       linkProyecto: proyecto.link,
       imagenProyecto: proyecto.imagen,
-      fechaCreacionProyecto: proyecto.fechaCreacion,  
+      fechaCreacionProyecto: proyecto.fechaCreacion,
     });
   }
 
-  public resetForm(){
+  public resetForm() {
     this.formProyecto.reset();
   }
 

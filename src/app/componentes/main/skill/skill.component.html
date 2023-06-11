@@ -14,7 +14,7 @@
       <div *ngFor="let skill of skills">
         <div class="d-flex">
           <div class="">
-            <circle-progress style="width: 175px;" [title]="(skill.nombre)" [showTitle]="true" [showUnits]="true"
+            <circle-progress style="width: 150px;" [title]="(skill.nombre)" [showTitle]="true" [showUnits]="true"
               [percent]="(skill.porcentaje)" [radius]="100" [outerStrokeWidth]="10" [innerStrokeWidth]="6"
               [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="600"
               [responsive]="true" [imageSrc]="''" [showImage]="false" [imageHeight]="50" [imageWidth]="50"
@@ -47,30 +47,46 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formDeCreacionSkill="ngForm" (ngSubmit)="onAgregarSkill(formDeCreacionSkill)" id="formDeCreacionSkill">
-          <div class="form-floating mb-3">
-            <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
-            <label for="nombre">Nombre de la habilidad</label>
-            <!-- <div class="alert alert-danger" role="alert">
-                            Campo obligatorio!
-                        </div> -->
+        <form [formGroup]="formSkill" (ngSubmit)="onAgregarSkill()" id="formDeCreacionSkill">
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="nombre" class="form-control" id="nombre"
+              [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
+            <label for="nombre">Nombre del Proyecto</label>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+              <div *ngIf="nombre.errors?.['required']">
+                El nombre es obligatorio.
+              </div>
+            </div>
           </div>
-          <div class="form-floating">
-            <input type="text" name="porcentaje" ngModel class="form-control" id="porcentaje" required>
-            <label for="porcentaje">Porcentaje estimado de la habilidad</label>
+          <!-- <div class="alert alert-danger" role="alert">
+                                  Campo obligatorio!
+                              </div> -->
+      
+          <div class="form-floating mb-1">
+            <input type="number" formControlName="porcentajeHabilidad" class="form-control" id="porcentajeHabilidad"
+              [ngClass]="{'is-invalid':porcentajeHabilidad?.errors && porcentajeHabilidad?.dirty,'is-valid':!porcentajeHabilidad?.errors && porcentajeHabilidad?.dirty}">
+            <label for="porcentajeHabilidad">Porcentaje de la Habilidad</label>
+            <div *ngIf="porcentajeHabilidad.invalid && (porcentajeHabilidad.dirty || porcentajeHabilidad.touched)" class="text-danger mb-3">
+              <div *ngIf="porcentajeHabilidad.errors?.['required']">
+                El porcentaje estimado es obligatorio.
+              </div>
+              <div *ngIf="porcentajeHabilidad.errors?.['min'] || porcentajeHabilidad.errors?.['max']">
+                Porcentaje incorrecto.
+              </div>
+            </div>
           </div>
           <!-- <div class="form-floating">
-                        <label for="imagenUrl">Imagen URL</label>
-                        <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
-                           placeholder="Image URL">
-                    </div> -->
+                              <label for="imagenUrl">Imagen URL</label>
+                              <input type="text" formControlName="imagenUrl" class="form-control" id="imagenUrl"
+                                 placeholder="Image URL">
+                          </div> -->
         </form>
         <!-- submit no funciona. está fuera del form -->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Cerrar
           </button>
-          <button type="submit" form="formDeCreacionSkill" [disabled]="!formDeCreacionSkill.valid"
+          <button type="submit" form="formDeCreacionSkill" [disabled]="!formSkill.valid"
             class="btn btn-primary">
             Agregar
           </button>
@@ -90,32 +106,42 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formDeActualizacionSkill="ngForm" (ngSubmit)="onActualizarSkill(formDeActualizacionSkill.value)"
+        <form [formGroup]="formSkill" (ngSubmit)="onActualizarSkill()"
           id="formDeActualizacionSkill">
-          <div class="form-floating mb-3">
-            <input type="text" name="nombre" ngModel class="form-control" id="nombre" required>
-            <label for="nombre">Nombre de la habilidad</label>
-            <!-- <div class="alert alert-danger" role="alert">
-                            Campo obligatorio!
-                        </div> -->
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="nombre" class="form-control" id="nombre"
+              [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
+            <label for="nombre">Nombre del Proyecto</label>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+              <div *ngIf="nombre.errors?.['required']">
+                El nombre es obligatorio.
+              </div>
+            </div>
           </div>
-          <input type="hidden" ngModel="{{editSkill?.id}}" name="id" class="form-control" id="id">
-          <div class="form-floating">
-            <input type="text" name="porcentaje" ngModel class="form-control" id="porcentaje" required>
-            <label for="porcentaje">Nuevo porcentaje de la habilidad</label>
+          <!-- <div class="alert alert-danger" role="alert">
+                                  Campo obligatorio!
+                              </div> -->
+      
+          <div class="form-floating mb-1">
+            <input type="number" formControlName="porcentajeHabilidad" class="form-control" id="porcentajeHabilidad"
+              [ngClass]="{'is-invalid':porcentajeHabilidad?.errors && porcentajeHabilidad?.dirty,'is-valid':!porcentajeHabilidad?.errors && porcentajeHabilidad?.dirty}">
+            <label for="porcentajeHabilidad">Porcentaje de la Habilidad</label>
+            <div *ngIf="porcentajeHabilidad.invalid && (porcentajeHabilidad.dirty || porcentajeHabilidad.touched)" class="text-danger mb-3">
+              <div *ngIf="porcentajeHabilidad.errors?.['required']">
+                El porcentaje estimado es obligatorio.
+              </div>
+              <div *ngIf="porcentajeHabilidad.errors?.['min'] || porcentajeHabilidad.errors?.['max']">
+                Porcentaje incorrecto.
+              </div>
+            </div>
           </div>
-          <!-- <div class="form-floating">
-                        <label for="imagenUrl">Imagen URL</label>
-                        <input type="text" name="imagenUrl" ngModel class="form-control" id="imagenUrl"
-                           placeholder="Image URL" required>
-                    </div> -->
         </form>
         <!-- submit no funciona. está fuera del form -->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Cerrar
           </button>
-          <button form="formDeActualizacionSkill" [disabled]="!formDeActualizacionSkill.valid" class="btn btn-primary">
+          <button form="formDeActualizacionSkill" [disabled]="!formSkill.valid" class="btn btn-primary">
             Actualizar
           </button>
         </div>
@@ -136,10 +162,10 @@
       </div>
 
       <div class="modal-body">
-        <p>Seguro que se desea eliminar la habilidad "{{deleteSkill?.nombre}}" ?</p>
+        <p>Seguro que se desea eliminar la habilidad "{{nombre.value}}" ?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button (click)="onEliminarSkill(deleteSkill.id)" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
+          <button (click)="onEliminarSkill()" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
         </div>
       </div>
     </div>

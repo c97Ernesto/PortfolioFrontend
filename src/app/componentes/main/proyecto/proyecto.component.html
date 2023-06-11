@@ -60,7 +60,7 @@
 
                   <div class="form-floating mb-1">
                       <input type="text" formControlName="nombre" class="form-control" id="nombre"
-                      [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
+                      [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
                       <label for="nombre">Nombre del Proyecto</label>
                       <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
                           <div *ngIf="nombre.errors?.['required']" >
@@ -71,7 +71,7 @@
 
                   <div class="form-floating mb-1">
                       <input type="text" formControlName="descripcion" class="form-control form-control" id="descripcion"
-                      [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched,'is-valid':!descripcion?.errors && descripcion?.touched}">
+                      [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
                       <label for="descripcion">Breve descripcion del proyecto</label>
                       <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                           <div *ngIf="descripcion.errors?.['required']" >
@@ -121,7 +121,7 @@
                   id="formDeActualizacionProyecto">
                   <div class="form-floating mb-1">
                     <input type="text" formControlName="nombre" class="form-control" id="nombre"
-                    [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
+                    [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
                     <label for="nombre">Nombre del Proyecto</label>
                     <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
                         <div *ngIf="nombre.errors?.['required']" >
@@ -132,7 +132,7 @@
 
                 <div class="form-floating mb-1">
                     <input type="text" formControlName="descripcion" class="form-control form-control" id="descripcion"
-                    [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched,'is-valid':!descripcion?.errors && descripcion?.touched}">
+                    [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
                     <label for="descripcion">Breve descripcion del proyecto</label>
                     <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                         <div *ngIf="descripcion.errors?.['required']" >
