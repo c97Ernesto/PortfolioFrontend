@@ -4,7 +4,8 @@ personal), y la información del "footer" (email y teléfono)-->
 <div id="container-persona">
     <div class="card mb-3 ">
         <div>
-            <img class="card-img-top" src="/assets/Imagenes/fondo.jpg" alt="Foto de fondo">
+            <img class="card-img-top" *ngIf="persona?.imgFondo" src="{{ persona?.imgFondo }}" alt="imagen de fondo">
+            <img class="card-img-top" *ngIf="!persona?.imgFondo" src="../../../../assets/Imagenes/fondo.jpg" alt="imagen de fondo">
         </div>
 
         <div class="card-body d-flex">
