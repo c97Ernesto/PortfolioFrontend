@@ -29,12 +29,13 @@ export class EducacionComponent implements OnInit {
     descripcion: ['', Validators.required],
     fechaInicio: [],
     fechaFin: [],
-    logo: [],
+    urlLogoInstitucion: [],
   });
 
 
   get nombre() { return this.educationForm.get('nombre'); }
   get descripcion() { return this.educationForm.get('descripcion'); }
+  
 
   
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class EducacionComponent implements OnInit {
         this.educationForm.value.descripcion,
         this.educationForm.value.fechaInicio,
         this.educationForm.value.fechaFin,
-        this.educationForm.value.logo
+        this.educationForm.value.urlLogoInstitucion
       );
 
       console.log(educacion);
@@ -88,7 +89,7 @@ export class EducacionComponent implements OnInit {
         this.educationForm.value.descripcion,
         this.educationForm.value.fechaInicio,
         this.educationForm.value.fechaFin,
-        this.educationForm.value.logo
+        this.educationForm.value.urlLogoInstitucion
       );
 
       this.estudioService.actualizarEducacion(educacion).subscribe(
@@ -131,7 +132,7 @@ export class EducacionComponent implements OnInit {
       descripcion: educacion.descripcion,
       fechaInicio: educacion.fechaInicio,
       fechaFin: educacion.fechaFin,
-      logo: educacion.logo,
+      urlLogoInstitucion: educacion.logo,
     });
   }
 

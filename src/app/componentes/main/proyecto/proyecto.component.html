@@ -6,21 +6,23 @@
       <div class="row align-items-center justify-content-between">
           <div class="list-group col-lg-8 col-md-12">
               <div *ngFor="let proyecto of proyectos" class="list-group-item d-flex justify-content-between">
-                  <div class="d-flex align-items-center">
-                      <!-- <div class="logo-image-container">
-                              <a href=""><img src="{{proyecto?.imagenUrl}}" alt="foto-del-proyecto" class="img-fluid rounded-circle w-60"></a>
-                           </div> -->
-                      <div class="logo-image-container">
-                          <img src="../../../../assets/Imagenes/mortarboard-bootstrap.svg">
-                      </div>
-                      <div class="list-info ">
-                          <h5 class="mb-1">{{proyecto?.nombre}}</h5>
-                          <p class="mb-1">{{proyecto?.descripcion}}</p>
-
-                          <p class="mb-1">Fecha creación de proyecto: {{proyecto?.fechaCreacion | date: 'longDate'}}</p>
-                          <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
-                      </div>
-                  </div>
+                <div class="d-flex align-items-center">
+                    <!-- <div class="logo-image-container">
+                                              <a href=""><img src="{{proyecto?.imagenUrl}}" alt="foto-del-proyecto" class="img-fluid rounded-circle w-60"></a>
+                                           </div> -->
+                    <div class="logo-image-container">
+                        <img *ngIf="proyecto?.imagen" src="{{ proyecto?.imagen }}" alt="logo-de-la-educacion">
+                        <img *ngIf="!proyecto?.imagen" src="../../../../assets/Imagenes/calculator-bootstrap.svg"
+                            alt="logo-por-defecto-de-la-eduacion">
+                    </div>
+                    <div class="list-info ">
+                        <h5 class="mb-1">{{proyecto?.nombre}}</h5>
+                        <p class="mb-1 description-style">{{proyecto?.descripcion}}</p>
+                
+                        <p class="mb-1">Fecha creación de proyecto: {{proyecto?.fechaCreacion | date: 'longDate'}}</p>
+                        <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
+                    </div>
+                </div>
                   <div *ngIf="isLogged" class="d-flex align-items-start">
                       <button (click)="onOpenModal(proyecto, 'actualizar')" class="btn btn-secondary"
                           data-placement="top" data-original-title="Edit">
@@ -70,8 +72,9 @@
                   </div>
 
                   <div class="form-floating mb-1">
-                      <input type="text" formControlName="descripcion" class="form-control form-control" id="descripcion"
-                      [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
+                      <textarea class="form-control" formControlName="descripcion"
+                            placeholder="Información detallada" id="descripcion" style="height: 100px"
+                            [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
                       <label for="descripcion">Breve descripcion del proyecto</label>
                       <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                           <div *ngIf="descripcion.errors?.['required']" >
@@ -131,8 +134,9 @@
                 </div>
 
                 <div class="form-floating mb-1">
-                    <input type="text" formControlName="descripcion" class="form-control form-control" id="descripcion"
-                    [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
+                    <textarea class="form-control" formControlName="descripcion"
+                            placeholder="Información detallada" id="descripcion" style="height: 75px"
+                            [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
                     <label for="descripcion">Breve descripcion del proyecto</label>
                     <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                         <div *ngIf="descripcion.errors?.['required']" >

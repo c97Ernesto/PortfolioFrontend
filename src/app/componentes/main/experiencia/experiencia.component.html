@@ -7,15 +7,14 @@
             <div class="list-group col-lg-8 col-md-12">
                 <div *ngFor="let exp of experiencia" class="list-group-item d-flex justify-content-between">
                     <div class="d-flex align-items-center">
-                        <!-- <div class="logo-image-container">
-                                <a href=""><img src="{{exp?.imagenUrl}}" alt="foto-de-la-experiencia" class="img-fluid rounded-circle w-60"></a>
-                             </div> -->
-                        <div class="logo-image-container">
-                            <img src="../../../../assets/Imagenes/mortarboard-bootstrap.svg">
+                        
+                        <div class="logo-image-container">                            
+                            <img *ngIf="exp?.logo" src="{{ exp?.logo }}" alt="logo-experiencia">
+                            <img *ngIf="!exp?.logo" src="../../../../assets/Imagenes/mortarboard-bootstrap.svg" alt="logo-experiencia">
                         </div>
                         <div class="list-info ">
                             <h5 class="mb-1">{{exp?.nombre}}</h5>
-                            <p class="mb-1">{{exp?.descripcion}}</p>
+                            <p class="mb-1 description-style">{{exp?.descripcion}}</p>
                             <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
                             <div *ngIf="exp?.fechaInicio || exp?.fechaFin" class="d-flex">
                                 <p *ngIf="exp?.fechaInicio" class="mb-1" style="padding-right: 10px;">
@@ -74,8 +73,9 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion"
-                        [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
+                        <textarea class="form-control" formControlName="descripcion"
+                            placeholder="Información detallada" id="descripcion" style="height: 100px"
+                            [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
                         <label for="descripcion">Descripcion</label>
                         <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                             <div *ngIf="descripcion.errors?.['required']" >
@@ -135,9 +135,10 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" formControlName="descripcion" class="form-control" id="descripcion"
-                        [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}">
-                        <label for="descripcion">Descripcion</label>
+                        <textarea class="form-control" formControlName="descripcion"
+                            placeholder="Información detallada" id="descripcion" style="height: 100px"
+                            [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
+                        <label for="descripcion">Breve descripción del trabajo</label>
                         <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
                             <div *ngIf="descripcion.errors?.['required']" >
                                 La descripción es obligatoria.
@@ -163,7 +164,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button type="formDeActualizacionExperiencia" [disabled]="!experienciaForm.valid" class="btn btn-primary" data-bs-dismiss="modal">
+                    <button form="formDeActualizacionExperiencia" [disabled]="!experienciaForm.valid" class="btn btn-primary" data-bs-dismiss="modal">
                         Actualizar
                     </button>
                 </div>

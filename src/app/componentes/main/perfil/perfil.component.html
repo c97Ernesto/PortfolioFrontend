@@ -9,7 +9,9 @@ personal), y la información del "footer" (email y teléfono)-->
 
         <div class="card-body d-flex">
             <div class="perfil">
-                <img class="imagen-perfil" src="/assets/Imagenes/perfil-del-usuario.png" alt="Foto Perfil">
+                <img class="imagen-perfil" *ngIf="persona?.imgPerfilUrl" src="{{ persona?.imgPerfilUrl }}" alt="Foto Perfil">
+                <img class="imagen-perfil" *ngIf="!persona?.imgPerfilUrl" src="../../../../assets/Imagenes/perfil-del-usuario.png"
+                alt="Foto Perfil">
                 <div>
                     <h5 class="card-title">{{persona?.nombre}} {{persona?.apellido}}</h5>
                 </div>

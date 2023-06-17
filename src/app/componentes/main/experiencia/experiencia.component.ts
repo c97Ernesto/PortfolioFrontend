@@ -76,6 +76,7 @@ export class ExperienciaComponent implements OnInit {
         }
       );
     } else {
+      this.experienciaForm.markAllAsTouched();
       console.log(this.experienciaForm);
     }
   }
@@ -104,7 +105,7 @@ export class ExperienciaComponent implements OnInit {
 
       console.log(Experiencia);
     } else {
-
+      console.log(this.experienciaForm);
     }
 
     this.resetForm();
@@ -124,14 +125,14 @@ export class ExperienciaComponent implements OnInit {
       );
   }
 
-  private setValueForm(Experiencia: Experiencia) {
+  private setValueForm(experiencia: Experiencia) {
     this.experienciaForm.setValue({
-      id: Experiencia.id,
-      nombre: Experiencia.nombre,
-      descripcion: Experiencia.descripcion,
-      fechaInicio: Experiencia.fechaInicio,
-      fechaFin: Experiencia.fechaFin,
-      logo: Experiencia.logo,
+      id: experiencia.id,
+      nombre: experiencia.nombre,
+      descripcion: experiencia.descripcion,
+      fechaInicio: experiencia.fechaInicio,
+      fechaFin: experiencia.fechaFin,
+      logo: experiencia.logo,
     });
   }
 

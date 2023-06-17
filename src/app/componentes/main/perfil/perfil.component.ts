@@ -25,7 +25,7 @@ export class PerfilComponent {
       sobreMi: [],
       telefono: [],
       email: ['',[Validators.email]],
-      imgPerfilUrl: [],
+      imgPerfilUrl: [''],
       imgFondo: [],
     });
   }
