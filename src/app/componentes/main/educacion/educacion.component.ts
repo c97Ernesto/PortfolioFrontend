@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Educacion } from 'src/app/model/educacion';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { EducacionService } from 'src/app/service/educacion.service';
@@ -27,15 +27,45 @@ export class EducacionComponent implements OnInit {
     id: [],
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
-    fechaInicio: [],
+    fechaInicio: [new Date(),[this.fechaMinimaValidator(new Date('01-01-2000')), this.fechaMaximaValidator(new Date())]],
     fechaFin: [],
     urlLogoInstitucion: [],
   });
 
-
+  
   get nombre() { return this.educationForm.get('nombre'); }
   get descripcion() { return this.educationForm.get('descripcion'); }
+  get fechaInicio(): AbstractControl | null {
+    return this.educationForm.get('fechaInicio');
+  }
+  get fechaFin() { return this.educationForm.get('fechaFin') }
+
+  // Crear clase con validaciones
+  fechaMinimaValidator(minDate: Date) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const fechaMinima = new Date(minDate);
   
+      if (fechaIngresada < fechaMinima) {
+        return { fechaMenor: true };
+      }
+
+      return null;
+    };
+  }
+
+  fechaMaximaValidator(maxDate: Date) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const fechaMaxima = new Date(maxDate);
+  
+      if (fechaIngresada > fechaMaxima) {
+        return { fechaMayor: true };
+      }
+
+      return null;
+    };
+  }
 
   
   ngOnInit(): void {
@@ -138,6 +168,10 @@ export class EducacionComponent implements OnInit {
 
   public resetForm(){
     this.educationForm.reset();
+  }
+
+  public hayElementos(): boolean {
+    return this.estudios.length > 0;
   }
 
   public onOpenModal(educacion: Educacion, modo: string) {

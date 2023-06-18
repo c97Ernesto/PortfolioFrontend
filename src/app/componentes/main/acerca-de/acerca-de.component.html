@@ -1,7 +1,22 @@
 <!-- De igual manera que actualizamos la Persona, solo utilizamos un campo-->
 
 <!-- Card 1: Acerca de -->
-<div class="card" id="container-acercaDe">
+
+    <div *ngIf="persona?.sobreMi" class="card text-center " id="container-acercaDe">
+        <div class="card-body">
+            <h3>Acerca de Mi</h3>
+            <p class="card-text description-style">{{persona?.sobreMi}}</p>
+            <div *ngIf="isLogged" class="btn-edit ">
+                <button (click)="onOpenModal(persona, 'actualizar')" class="btn btn-light"
+                    data-original-title="Edit">
+                    <i class="bi bi-pencil"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+<!-- <div class="card" id="container-acercaDe">
     <div class="card-body">
         <div class="d-flex justify-content-between">
             <h5 class="card-title">Acerca de</h5>
@@ -15,14 +30,8 @@
         <div>
             <p class="card-text description-style">{{persona?.sobreMi}}</p>
         </div>
-        <!-- <div>
-            <p class="card-text">{{acercaDeForm.value.sobreMi}}</p>
-        </div>
-        <div>
-            <p class="card-text">{{sobreMi.value}}</p>
-        </div> -->
     </div>
-</div>
+</div> -->
 
 <!-- Modal, Actualizar Acerca De-->
 <div class="modal fade" id="actualizarAcercaDeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

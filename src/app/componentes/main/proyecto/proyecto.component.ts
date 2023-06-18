@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Proyecto } from 'src/app/model/proyecto';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { ProyectoService } from 'src/app/service/proyecto.service';
@@ -29,7 +29,12 @@ export class ProyectoComponent {
       descripcion: ['', [Validators.required]],
       linkProyecto: [],
       imagenProyecto: [],
-      fechaCreacionProyecto: [],
+      fechaCreacionProyecto: ['',
+        [
+          this.fechaMinimaValidator('01-01-2000'), 
+          this.fechaMaximaValidator()
+        ]
+      ],
     });
   }
 
@@ -39,11 +44,43 @@ export class ProyectoComponent {
   get descripcion() {
     return this.formProyecto.get('descripcion');
   }
+  get fechaCreacionProyecto() {
+    return this.formProyecto.get('fechaCreacionProyecto');
+  }
 
+
+   fechaMinimaValidator(minDate: string) {
+     return (control: AbstractControl): ValidationErrors | null => {
+       const fechaIngresada = new Date(control.value);
+       const fechaMinima = new Date(minDate);
+  
+       if (fechaIngresada < fechaMinima) {
+         return { fechaMenor: true };
+       }
+
+       return null;
+     };
+   }
+
+   fechaMaximaValidator() {
+     return (control: AbstractControl): ValidationErrors | null => {
+       const fechaIngresada = new Date(control.value);
+       const fechaMaxima = new Date();
+  
+       if (fechaIngresada > fechaMaxima) {
+         return { fechaMayor: true };
+       }
+
+       return null;
+     };
+   }
+
+  
   ngOnInit(): void {
     this.obtenerProyecto();
     this.isLogged = this.loginService.isLoggedIn();
   }
+
 
   public obtenerProyecto(): void {
     this.proyectoService.obtenerProyectos().subscribe(
@@ -78,6 +115,9 @@ export class ProyectoComponent {
       );
 
     } else {
+
+      this.formProyecto.markAllAsTouched();
+
       console.log(this.formProyecto);
     }
     this.resetForm();
@@ -123,18 +163,25 @@ export class ProyectoComponent {
   }
 
   private setValueForm(proyecto: Proyecto) {
+    // let fechaCreacionProyectoControl: FormControl = this.formProyecto.get('fechaCreacionProyecto') as FormControl;
+    // fechaCreacionProyectoControl.setValidators([this.fechaMinimaValidator('01-01-2000'), this.fechaMaximaValidator()])
     this.formProyecto.setValue({
       id: proyecto.id,
       nombre: proyecto.nombre,
       descripcion: proyecto.descripcion,
       linkProyecto: proyecto.link,
       imagenProyecto: proyecto.imagen,
-      fechaCreacionProyecto: proyecto.fechaCreacion,
+      fechaCreacionProyecto: proyecto.fechaCreacion
     });
+
   }
 
   public resetForm() {
     this.formProyecto.reset();
+  }
+
+  public hayElementos(): boolean {
+    return this.proyectos.length > 0;
   }
 
   public onOpenModal(proyecto: Proyecto, modo: string) {

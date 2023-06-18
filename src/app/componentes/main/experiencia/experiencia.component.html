@@ -1,4 +1,51 @@
-<div class="card" id="container-experiencia">
+<div class="card text-center" id="container-experiencia">
+    <div class="card-body">
+
+        <h2 *ngIf="hayElementos()">Experiencia</h2>
+
+        <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
+
+            <div *ngFor="let exp of experiencia" class="card text-center" style="width: 18rem;">
+                <img class="mx-auto d-block logo-image" *ngIf="exp?.logo" src="{{ exp?.logo }}"
+                    alt="logo-de-la-experiencia">
+                <img class="mx-auto d-block logo-image" *ngIf="!exp?.logo"
+                    src="../../../../assets/Imagenes/laptopBoostrap-svg.svg" alt="logo-por-defecto-de-la-eduacion">
+                <div class="card-body">
+                    <h4>{{exp?.nombre}}</h4>
+                    <p class="card-text description-style">{{exp?.descripcion}}</p>
+                    <div *ngIf="exp?.fechaInicio || exp?.fechaFin" class="container text-center">
+                        <div class="row">
+                            <p *ngIf="exp?.fechaInicio" class="col" style="padding-right: 10px;">
+                                Desde: {{exp?.fechaInicio | date: 'shortDate'}}
+                            </p>
+                            <p *ngIf="exp?.fechaFin" class="col">
+                                Hasta: {{exp?.fechaFin | date: 'shortDate'}}
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                        <button (click)="onOpenModal(exp, 'actualizar')" class="btn btn-outline-secondary"
+                            data-placement="top" data-original-title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button (click)="onOpenModal(exp, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
+                            data-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isLogged" style="padding-top: 10px;">
+            <a class="btn btn-outline-primary" (click)="onOpenModal(null, 'agregar')">
+                Nueva Experiencia
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card" id="container-experiencia">
     <div class="card-body">
         <div class="d-flex">
             <h3 class="card-title">Experiencia</h3>
@@ -15,7 +62,7 @@
                         <div class="list-info ">
                             <h5 class="mb-1">{{exp?.nombre}}</h5>
                             <p class="mb-1 description-style">{{exp?.descripcion}}</p>
-                            <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
+                            
                             <div *ngIf="exp?.fechaInicio || exp?.fechaFin" class="d-flex">
                                 <p *ngIf="exp?.fechaInicio" class="mb-1" style="padding-right: 10px;">
                                     Desde: {{exp?.fechaInicio | date: 'shortDate'}}
@@ -46,7 +93,7 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
 
 
@@ -86,12 +133,30 @@
 
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaInicio" class="form-control" id="fechaInicioExp">
-                        <label for="fechaInicio">Fecha de inicio Nueva Experiencia</label>
+                        <label for="fechaInicio">Fecha de inicio</label>
+                        <div *ngIf="(fechaInicio.errors?.['fechaMenor'] || fechaInicio.errors?.['fechaMayor']) && fechaInicio.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaInicio.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaInicio.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaFin" class="form-control" id="fechafinExp">
-                        <label for="fechaFin">Fecha de finalización Nueva Experiencia</label>
+                        <label for="fechaFin">Fecha de finalización</label>
+                        <!-- <div *ngIf="(fechaFin.errors?.['fechaMenor'] || fechaFin.errors?.['fechaMayor']) && fechaFin.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaFin.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a {{ fechaInicio.value }}.</p>
+                            </div>
+                            <div *ngIf="fechaFin.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div> -->
                     </div>
                     <div class="form-floating mb-1">
                         <input type="text" formControlName="logo" class="form-control" id="logo">
@@ -149,11 +214,29 @@
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaInicio" class="form-control" id="fechaInicioExp">
                         <label for="fechaInicio">Fecha de inicio</label>
+                        <div *ngIf="(fechaInicio.errors?.['fechaMenor'] || fechaInicio.errors?.['fechaMayor']) && fechaInicio.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaInicio.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaInicio.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaFin" class="form-control" id="fechafinExp">
                         <label for="fechaFin">Fecha de finalización</label>
+                        <div *ngIf="(fechaFin.errors?.['fechaMenor'] || fechaFin.errors?.['fechaMayor']) && fechaFin.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaFin.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaFin.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                     </div>
                     <div class="form-floating mb-1">
                         <input type="text" formControlName="logo" class="form-control" id="logo">

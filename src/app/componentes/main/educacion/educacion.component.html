@@ -1,29 +1,57 @@
-<!-- <div class="card" id="container-educacion">
+<div class="card text-center" id="container-educacion">
     <div class="card-body">
-        <h3 class="card-title">Educación</h3>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <h2 *ngIf="hayElementos()">Estudios</h2>
 
-            <div *ngFor="let educacion of estudios" class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+        <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
+
+            <div *ngFor="let educacion of estudios" class="card text-center" style="width: 18rem;">
+                <img class="mx-auto d-block logo-image" *ngIf="educacion?.logo" src="{{ educacion?.logo }}"
+                    alt="logo-de-la-educacion">
+                <img class="mx-auto d-block logo-image" *ngIf="!educacion?.logo"
+                    src="../../../../assets/Imagenes/mortarboard-bootstrap.svg" alt="logo-por-defecto-de-la-eduacion">
+
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h4>{{educacion?.nombre}}</h4>
+                    <p class="card-text description-style">{{educacion?.descripcion}}</p>
+
+                    <div *ngIf="educacion?.fechaInicio || educacion?.fechaFin" class="container text-center">
+                        <div class="row">
+                            <p *ngIf="educacion?.fechaInicio" class="col" style="padding-right: 10px;">
+                                Desde: {{educacion?.fechaInicio | date: 'shortDate'}}
+                            </p>
+                            <p *ngIf="educacion?.fechaFin" class="col">
+                                Hasta: {{educacion?.fechaFin | date: 'shortDate'}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                        <button (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-outline-secondary"
+                            data-placement="top" data-original-title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button (click)="onOpenModal(educacion, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
+                            data-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+
                 </div>
             </div>
-
         </div>
-
+        <div *ngIf="isLogged" style="padding-top: 10px;">
+            <a class="btn btn-outline-primary" (click)="onOpenModal(null, 'agregar')">
+                Nuevo Estudio
+            </a>
+        </div>
     </div>
-</div> -->
+</div>
 
-<div class="card" id="container-educacion">
+<!-- <div class="card" id="container-educacion">
     <div class="card-body">
         <div class="d-flex">
-            <h3 class="card-title">Educación</h3>
+            <h3 class="card-title">Estudios</h3>
         </div>
         <div class="row align-items-center justify-content-between">
             <div class="list-group col-lg-8 col-md-12">
@@ -39,7 +67,7 @@
                         <div class="list-info ">
                             <h5 class="mb-1">{{educacion?.nombre}}</h5>
                             <p class="mb-1 description-style">{{educacion?.descripcion}}</p>
-                            <!-- <p class="mb-1">{{exp?.fechaInicio | date:"d 'de' MMMM 'de' YYYY"}}</p> -->
+                            
                             <div *ngIf="educacion?.fechaInicio || educacion?.fechaFin" class="d-flex">
                                 <p *ngIf="educacion?.fechaInicio" class="mb-1" style="padding-right: 10px;">
                                     Desde: {{educacion?.fechaInicio | date: 'shortDate'}}
@@ -71,7 +99,7 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
 
 
@@ -112,14 +140,33 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="date" formControlName="fechaInicio" class="form-control" id="fechaInicioEducacion">
-                        <label for="fechaInicio">Fecha de inicio de estudio</label>
+                        <input type="date" formControlName="fechaInicio" class="form-control" id="fechaInicioExp">
+                        <label for="fechaInicio">Fecha de inicio</label>
+                        <div *ngIf="(fechaInicio.errors?.['fechaMenor'] || fechaInicio.errors?.['fechaMayor']) && fechaInicio.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaInicio.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaInicio.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="date" formControlName="fechaFin" class="form-control" id="fechafinEducacion">
-                        <label for="fechaFin">Fecha de finalización de estudio</label>
+                        <input type="date" formControlName="fechaFin" class="form-control" id="fechafinExp">
+                        <label for="fechaFin">Fecha de finalización</label>
+                        <!-- <div *ngIf="(fechaFin.errors?.['fechaMenor'] || fechaFin.errors?.['fechaMayor']) && fechaFin.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaFin.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaFin.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div> -->
                     </div>
+
                     <div class="form-floating mb-1">
                         <input type="text" formControlName="urlLogoInstitucion" class="form-control"
                             id="urlLogoInstitucion">
@@ -178,12 +225,30 @@
 
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaInicio" class="form-control" id="fechaInicioEducacion">
-                        <label for="fechaInicio">Fecha de inicio de estudio</label>
+                        <label for="fechaInicio">Fecha de inicio</label>
+                        <div *ngIf="(fechaInicio.errors?.['fechaMenor'] || fechaInicio.errors?.['fechaMayor']) && fechaInicio.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaInicio.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaInicio.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-1">
                         <input type="date" formControlName="fechaFin" class="form-control" id="fechafinEducacion">
                         <label for="fechaFin">Fecha de finalización de estudio</label>
+                        <!-- <div *ngIf="(fechaFin.errors?.['fechaMenor'] || fechaFin.errors?.['fechaMayor']) && fechaFin.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaFin.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaFin.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div> -->
                     </div>
                     <div class="form-floating mb-1">
                         <input type="text" formControlName="urlLogoInstitucion" class="form-control"

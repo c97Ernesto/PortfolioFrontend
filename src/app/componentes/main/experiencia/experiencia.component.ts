@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Experiencia } from 'src/app/model/experiencia';
 import { LoginService } from 'src/app/service/authentication/login.service';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
@@ -27,15 +27,48 @@ export class ExperienciaComponent implements OnInit {
     id: [],
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
-    fechaInicio: [],
+    fechaInicio: [new Date(),[this.fechaMinimaValidator(new Date('01-01-2000')), this.fechaMaximaValidator(new Date())]],
     fechaFin: [],
     logo: [],
   });
 
-
   get nombre() { return this.experienciaForm.get('nombre'); }
   get descripcion() { return this.experienciaForm.get('descripcion'); }
+  get fechaInicio(){
+    return this.experienciaForm.get('fechaInicio')
+  }
+  // get fechaInicio(){
+  //   return this.experienciaForm.get('fechaInicio').setValidators([this.fechaMinimaValidator(new Date('01-01-2000')),this.fechaMaximaValidator(new Date())]);
+  // }
+  get fechaFin() { return this.experienciaForm.get('fechaFin') }
 
+  // Crear clase con validaciones
+  fechaMinimaValidator(minDate: Date) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const fechaMinima = new Date(minDate);
+  
+      if (fechaIngresada < fechaMinima) {
+        return { fechaMenor: true };
+      }
+
+      return null;
+    };
+  }
+
+  fechaMaximaValidator(maxDate: Date) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const fechaMaxima = new Date(maxDate);
+  
+      if (fechaIngresada > fechaMaxima) {
+        return { fechaMayor: true };
+      }
+
+      return null;
+    };
+  }
+  
   
   ngOnInit(): void {
     this.obtenerExperiencia();
@@ -104,9 +137,8 @@ export class ExperienciaComponent implements OnInit {
       );
 
       console.log(Experiencia);
-    } else {
-      console.log(this.experienciaForm);
-    }
+
+    } else {console.log(this.experienciaForm);}
 
     this.resetForm();
   }
@@ -138,6 +170,10 @@ export class ExperienciaComponent implements OnInit {
 
   public resetForm(){
     this.experienciaForm.reset();
+  }
+
+  public hayElementos(): boolean {
+    return this.experiencia.length > 0;
   }
 
   public onOpenModal(experiencia: Experiencia, modo: string) {

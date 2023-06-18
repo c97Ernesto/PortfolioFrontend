@@ -1,4 +1,45 @@
-<div class="card" id="container-proyecto">
+<div class="card text-center" id="container-proyecto">
+    <div class="card-body">
+
+        <h2 *ngIf="hayElementos()">Proyectos</h2>
+
+        <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
+
+            <div *ngFor="let proyecto of proyectos" class="card text-center" style="width: 18rem;">
+                <img class="mx-auto d-block logo-image" *ngIf="proyecto?.imagen" src="{{ proyecto?.imagen }}"
+                    alt="imagen-proyecto">
+                <img class="mx-auto d-block logo-image" *ngIf="!proyecto?.imagen"
+                    src="../../../../assets/Imagenes/calculator-bootstrap.svg" alt="logo-por-defecto-de-la-eduacion">
+                <div class="card-body">
+                    <h4>{{proyecto?.nombre}}</h4>
+                    <p class="card-text description-style">{{proyecto?.descripcion}}</p>
+                    <p *ngIf="proyecto?.fechaCreacion">
+                        Fecha creación de proyecto: {{proyecto?.fechaCreacion | date: 'longDate'}}
+                    </p>
+                    <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
+
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                        <button (click)="onOpenModal(proyecto, 'actualizar')" class="btn btn-outline-secondary"
+                            data-placement="top" data-original-title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button (click)="onOpenModal(proyecto, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
+                            data-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isLogged" style="padding-top: 10px;">
+            <a class="btn btn-outline-primary" (click)="onOpenModal(null, 'agregar')">
+                Nuevo Proyecto
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card" id="container-proyecto">
   <div class="card-body">
       <div class="d-flex">
           <h3 class="card-title">Proyecto</h3>
@@ -7,9 +48,7 @@
           <div class="list-group col-lg-8 col-md-12">
               <div *ngFor="let proyecto of proyectos" class="list-group-item d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <!-- <div class="logo-image-container">
-                                              <a href=""><img src="{{proyecto?.imagenUrl}}" alt="foto-del-proyecto" class="img-fluid rounded-circle w-60"></a>
-                                           </div> -->
+
                     <div class="logo-image-container">
                         <img *ngIf="proyecto?.imagen" src="{{ proyecto?.imagen }}" alt="logo-de-la-educacion">
                         <img *ngIf="!proyecto?.imagen" src="../../../../assets/Imagenes/calculator-bootstrap.svg"
@@ -43,7 +82,7 @@
       </div>
 
   </div>
-</div>
+</div> -->
 
 
 
@@ -92,9 +131,19 @@
                       <input type="text" formControlName="imagenProyecto" class="form-control" id="imagenProyecto">
                       <label for="imagenProyecto">Url de imagen ilustrativa</label>
                   </div>
+
                   <div class="form-floating mb-1">
                       <input type="date" formControlName="fechaCreacionProyecto" class="form-control" id="fechaCreacionProyecto">
                       <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
+                      <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaCreacionProyecto.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaCreacionProyecto.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
                   </div>                  
               </form>
               <div class="modal-footer">
@@ -157,6 +206,16 @@
                 <div class="form-floating mb-1">
                     <input type="date" formControlName="fechaCreacionProyecto" class="form-control" id="fechaCreacionProyecto">
                     <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
+                    <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
+                    class="text-danger mb-3">
+                    <div *ngIf="fechaCreacionProyecto.errors?.['fechaMenor']">
+                        <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                    </div>
+                    <div *ngIf="fechaCreacionProyecto.errors?.['fechaMayor']">
+                        <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                    </div>
+                </div>
+
                 </div>
                   
               </form>

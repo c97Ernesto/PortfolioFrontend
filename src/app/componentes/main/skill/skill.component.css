@@ -1,11 +1,9 @@
-.card-title {
-  margin-right: 20px;
+.logo-image{
+  width: 150px;
+  height: 135px;
+  padding: 0%;
 }
 
-.logo-image-container {
-  margin-right: 10px;
-}
-
-.logo-image-container img {
-  width: 75px;
+.description-style {
+  white-space: pre-wrap;
 }
