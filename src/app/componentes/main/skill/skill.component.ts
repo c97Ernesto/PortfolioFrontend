@@ -108,6 +108,10 @@ export class SkillComponent {
     this.formSkill.reset();
   }
 
+  public hayElementos() {
+    return this.skills.length > 0
+  }
+
   public onOpenModal(skill: Skill, modo: string) {
     const contenedor = document.getElementById('container-skill');
     const boton = document.createElement('button');

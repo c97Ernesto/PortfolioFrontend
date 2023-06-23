@@ -1,5 +1,6 @@
 <footer>
   <div class="container-footer">
+    <div>
     <p>© 2023 My Portfolio</p>
     <ul *ngIf="persona?.telefono || persona?.email" >
       <li *ngIf="persona?.telefono">
@@ -11,5 +12,7 @@
         {{persona?.email}}
       </li>
     </ul>
+  </div>
+  <app-redes></app-redes>
   </div>
 </footer>

@@ -1,4 +1,4 @@
-<div class="card text-center" id="container-educacion">
+<div class="text-center pt-3 pb-3" id="container-educacion">
     <div class="card-body">
 
         <h2 *ngIf="hayElementos()">Estudios</h2>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" >
                         <button (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-outline-secondary"
                             data-placement="top" data-original-title="Edit">
                             <i class="bi bi-pencil"></i>

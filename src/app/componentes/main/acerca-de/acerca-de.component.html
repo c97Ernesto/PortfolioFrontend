@@ -2,15 +2,16 @@
 
 <!-- Card 1: Acerca de -->
 
-    <div *ngIf="persona?.sobreMi" class="card text-center " id="container-acercaDe">
+    <div class="card text-center " id="container-acercaDe">
         <div class="card-body">
-            <h3>Acerca de Mi</h3>
+
+            <h3 *ngIf="persona?.sobreMi">Acerca de Mi</h3>
+
             <p class="card-text description-style">{{persona?.sobreMi}}</p>
-            <div *ngIf="isLogged" class="btn-edit ">
-                <button (click)="onOpenModal(persona, 'actualizar')" class="btn btn-light"
-                    data-original-title="Edit">
-                    <i class="bi bi-pencil"></i>
-                </button>
+            <div *ngIf="isLogged" style="padding-top: 10px;">
+                <a class="btn btn-outline-primary" (click)="onOpenModal(persona, 'actualizar')">
+                    Agregar sobre mi
+                </a>
             </div>
         </div>
     </div>

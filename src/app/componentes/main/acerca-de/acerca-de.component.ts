@@ -71,6 +71,10 @@ export class AcercaDeComponent {
     });
   }
 
+  public hayElementos(): boolean {
+    return (this.persona.sobreMi != '') || null;
+  }
+
   public onOpenModal(persona: Persona, modo: string) {
     const contenedor = document.getElementById('container-acercaDe');
     const boton = document.createElement('button');

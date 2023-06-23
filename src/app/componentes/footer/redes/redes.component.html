@@ -1,0 +1,164 @@
+<div class="text-center pt-3 pb-3" id="container-redSocial">
+  <div class="card-body">
+
+    <h2 *ngIf="hayElementos()">Redes</h2>
+
+    <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
+
+      <div *ngFor="let redSocial of redesSociales" class="card text-center" style="width: 18rem;">
+        <img class="mx-auto d-block logo-image" *ngIf="redSocial?.icono" src="{{ redSocial?.icono }}"
+          alt="logo-de-la-redSocial">
+        <img class="mx-auto d-block logo-image" *ngIf="!redSocial?.icono"
+          src="../../../../assets/Imagenes/mortarboard-bootstrap.svg" alt="logo-por-defecto-de-la-eduacion">
+
+        <div class="card-body">
+          <h4>{{redSocial?.nombre}}</h4>
+          <p class="card-text description-style">{{redSocial?.url}}</p>
+
+          <div *ngIf="isLogged" class="d-flex justify-content-evenly">
+            <button (click)="onOpenModal(redSocial, 'actualizar')" class="btn btn-outline-secondary"
+              data-placement="top" data-original-title="Edit">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <!-- <button (click)="onOpenModal(redSocial, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
+              data-original-title="Delete">
+              <i class="bi bi-trash"></i>
+            </button> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isLogged" style="padding-top: 10px;">
+      <a class="btn btn-outline-primary" (click)="onOpenModal(null, 'agregar')">
+        Nuevo Estudio
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal, Agregar RedSocial-->
+<div class="modal fade" id="agregarRedSocialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Estudio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onAgregarRedSocial()" id="formDeCreacionRedSocial">
+
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="nombre" class="form-control" id="nombre"
+              [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
+            <label for="nombre">Nombre</label>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+              <div *ngIf="nombre.errors?.['required']">
+                El nombre es obligatorio.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="enlace" class="form-control" id="enlace"
+              [ngClass]="{'is-invalid':enlace?.errors && enlace?.touched,'is-valid':!enlace?.errors && enlace?.touched}">
+            <label for="enlace">Link</label>
+            <div *ngIf="enlace.invalid && (enlace.dirty || enlace.touched)" class="text-danger mb-3">
+              <div *ngIf="enlace.errors?.['required']">
+                El link es obligatorio.
+              </div>
+            </div>
+          </div>
+
+          <label for="inputPassword5" class="form-label">Nombre</label>
+          <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+
+          <label for="inputPassword5" class="form-label">Enlace</label>
+          <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <button form="formDeCreacionRedSocial" [disabled]="!form.valid" class="btn btn-primary">
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal, Actualizar RedSocial-->
+<div class="modal fade" id="actualizarRedSocialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edición</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onActualizarRedSocial()" id="formDeActualizacionRedSocial">
+
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="nombre" class="form-control" id="nombre"
+              [ngClass]="{'is-invalid':nombre?.errors && nombre?.touched,'is-valid':!nombre?.errors && nombre?.touched}">
+            <label for="nombre">Nombre</label>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+              <div *ngIf="nombre.errors?.['required']">
+                El nombre es obligatorio.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input type="text" formControlName="enlace" class="form-control" id="enlace"
+              [ngClass]="{'is-invalid':enlace?.errors && enlace?.touched,'is-valid':!enlace?.errors && enlace?.touched}">
+            <label for="enlace">Link</label>
+            <div *ngIf="enlace.invalid && (enlace.dirty || enlace.touched)" class="text-danger mb-3">
+              <div *ngIf="enlace.errors?.['required']">
+                El link es obligatorio.
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- submit no funciona. está fuera del form -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <button form="formDeActualizacionRedSocial" [disabled]="!form.valid" class="btn btn-primary"
+            data-bs-dismiss="modal">
+            Actualizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal, Eliminar RedSocial-->
+<div class="modal fade" id="eliminarRedSocialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Estudio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Seguro que se desea eliminar la educacíon "{{form.value.nombre}}" ?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button (click)="onEliminarRedSocial()" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

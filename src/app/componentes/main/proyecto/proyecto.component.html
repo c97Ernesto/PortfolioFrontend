@@ -1,4 +1,4 @@
-<div class="card text-center" id="container-proyecto">
+<div class="text-center pt-3 pb-3" id="container-proyecto">
     <div class="card-body">
 
         <h2 *ngIf="hayElementos()">Proyectos</h2>
@@ -18,7 +18,7 @@
                     </p>
                     <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
 
-                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" >
                         <button (click)="onOpenModal(proyecto, 'actualizar')" class="btn btn-outline-secondary"
                             data-placement="top" data-original-title="Edit">
                             <i class="bi bi-pencil"></i>

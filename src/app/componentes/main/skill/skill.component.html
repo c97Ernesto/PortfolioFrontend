@@ -1,10 +1,8 @@
-<div class="card" id="container-skill">
+<div class="text-center pt-3 pb-3" id="container-skill">
   <div class="card-body">
-    <div class="d-flex justify-content-between">
-      <div>
-        <h3 class="card-title">Habilidades técnicas e interpersonales</h3>
-      </div>
-    </div>
+
+      <h2 *ngIf="hayElementos()">Habilidades técnicas e interpersonales</h2>
+
     <div class="container text-center">
       <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
         <div *ngFor="let skill of skills">
@@ -16,24 +14,24 @@
               [titleColor]="'black'">
             </circle-progress>
 
-            <div *ngIf="isLogged" class="">
-              <a (click)="onOpenModal(skill, 'actualizar')" class="btn btn-secondary" data-placement="top"
-                data-original-title="Edit">
-                <i class="bi bi-pencil"></i>
-              </a>
-              <a (click)="onOpenModal(skill, 'eliminar')" class="btn btn-danger" data-placement="top"
-                data-original-title="Delete">
-                <i class="bi bi-trash"></i>
-              </a>
-            </div>
+            <div *ngIf="isLogged" class="d-flex justify-content-evenly" >
+              <button (click)="onOpenModal(skill, 'actualizar')" class="btn btn-outline-secondary"
+                  data-placement="top" data-original-title="Edit">
+                  <i class="bi bi-pencil"></i>
+              </button>
+              <button (click)="onOpenModal(skill, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
+                  data-original-title="Delete">
+                  <i class="bi bi-trash"></i>
+              </button>
+          </div>
           </div>
         </div>
       </div>
-      <div *ngIf="isLogged" >
-        <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-          Nueva habilidad
+      <div *ngIf="isLogged" style="padding-top: 10px;">
+        <a class="btn btn-outline-primary" (click)="onOpenModal(null, 'agregar')">
+            Nueva Habilidad
         </a>
-      </div>
+    </div>
     </div>
   </div>
 </div>

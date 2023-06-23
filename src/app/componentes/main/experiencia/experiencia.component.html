@@ -1,6 +1,6 @@
-<div class="card text-center" id="container-experiencia">
-    <div class="card-body">
+<div class="text-center pt-3 pb-3" id="container-experiencia">
 
+    <div class="card-body">
         <h2 *ngIf="hayElementos()">Experiencia</h2>
 
         <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-4">
@@ -24,7 +24,7 @@
                         </div>
                         
                     </div>
-                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" style="padding-top: 10px;">
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly">
                         <button (click)="onOpenModal(exp, 'actualizar')" class="btn btn-outline-secondary"
                             data-placement="top" data-original-title="Edit">
                             <i class="bi bi-pencil"></i>

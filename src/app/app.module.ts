@@ -21,6 +21,7 @@ import { SkillComponent } from './componentes/main/skill/skill.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { DatePipe } from '@angular/common';
+import { RedesComponent } from './componentes/footer/redes/redes.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { DatePipe } from '@angular/common';
     ProyectoComponent,
     SkillComponent,
     FooterComponent,
+    RedesComponent,
   ],
   imports: [
     BrowserModule,
