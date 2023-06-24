@@ -1,0 +1,12 @@
+<div >
+  <ul *ngIf="persona?.telefono || persona?.email">
+    <li *ngIf="persona?.telefono" class="d-flex align-items-center">
+      <i class="bi-telephone " style="padding-right: 5px; font-size: 1.5rem; "></i>
+      {{persona?.telefono}}
+    </li>
+    <li *ngIf="persona?.email" class="d-flex align-items-center">
+      <i class="bi bi-envelope-at " style="padding-right: 5px; font-size: 1.5rem;"></i>
+      {{persona?.email}}
+    </li>
+  </ul>
+</div>

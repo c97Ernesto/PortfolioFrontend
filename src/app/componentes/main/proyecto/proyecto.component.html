@@ -18,13 +18,13 @@
                     </p>
                     <a href="{{proyecto?.link}}">{{proyecto?.link}}</a>
 
-                    <div *ngIf="isLogged" class="d-flex justify-content-evenly" >
+                    <div *ngIf="isLogged" class="d-flex justify-content-evenly">
                         <button (click)="onOpenModal(proyecto, 'actualizar')" class="btn btn-outline-secondary"
                             data-placement="top" data-original-title="Edit">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <button (click)="onOpenModal(proyecto, 'eliminar')" class="btn btn-outline-danger" data-placement="top"
-                            data-original-title="Delete">
+                        <button (click)="onOpenModal(proyecto, 'eliminar')" class="btn btn-outline-danger"
+                            data-placement="top" data-original-title="Delete">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -88,54 +88,55 @@
 
 <!-- Modal, Agregar Proyecto-->
 <div class="modal fade" id="agregarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Proyecto</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form [formGroup]="formProyecto" (ngSubmit)="onAgregarProyecto()" 
-              id="formDeCreacionProyecto">
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Proyecto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formProyecto" (ngSubmit)="onAgregarProyecto()" id="formDeCreacionProyecto">
 
-                  <div class="form-floating mb-1">
-                      <input type="text" formControlName="nombre" class="form-control" id="nombre"
-                      [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
-                      <label for="nombre">Nombre del Proyecto</label>
-                      <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
-                          <div *ngIf="nombre.errors?.['required']" >
-                              El nombre es obligatorio.
-                          </div>
-                      </div>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                            [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
+                        <label for="nombre">Nombre del Proyecto</label>
+                        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+                            <div *ngIf="nombre.errors?.['required']">
+                                El nombre es obligatorio.
+                            </div>
+                        </div>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <textarea class="form-control" formControlName="descripcion"
-                            placeholder="Información detallada" id="descripcion" style="height: 100px"
+                    <div class="form-floating mb-1">
+                        <textarea class="form-control" formControlName="descripcion" placeholder="Información detallada"
+                            id="descripcion" style="height: 100px"
                             [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
-                      <label for="descripcion">Breve descripcion del proyecto</label>
-                      <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
-                          <div *ngIf="descripcion.errors?.['required']" >
-                              La descripción es obligatoria.
-                          </div>
-                      </div>
-                  </div>
+                        <label for="descripcion">Breve descripcion del proyecto</label>
+                        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
+                            class="text-danger mb-3">
+                            <div *ngIf="descripcion.errors?.['required']">
+                                La descripción es obligatoria.
+                            </div>
+                        </div>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" formControlName="linkProyecto" class="form-control" id="linkProyecto">
-                      <label for="linkProyecto">Url del Proyecto</label>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="linkProyecto" class="form-control" id="linkProyecto">
+                        <label for="linkProyecto">Url del Proyecto</label>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" formControlName="imagenProyecto" class="form-control" id="imagenProyecto">
-                      <label for="imagenProyecto">Url de imagen ilustrativa</label>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="imagenProyecto" class="form-control" id="imagenProyecto">
+                        <label for="imagenProyecto">Url de imagen ilustrativa</label>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="date" formControlName="fechaCreacionProyecto" class="form-control" id="fechaCreacionProyecto">
-                      <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
-                      <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
+                    <div class="form-floating mb-1">
+                        <input type="date" formControlName="fechaCreacionProyecto" class="form-control"
+                            id="fechaCreacionProyecto">
+                        <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
+                        <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
                             class="text-danger mb-3">
                             <div *ngIf="fechaCreacionProyecto.errors?.['fechaMenor']">
                                 <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
@@ -144,113 +145,115 @@
                                 <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
                             </div>
                         </div>
-                  </div>                  
-              </form>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cerrar
-                  </button>
-                  <button form="formDeCreacionProyecto" [disabled]="!formProyecto.valid" class="btn btn-primary">
-                      Agregar
-                  </button>
-              </div>
-          </div>
-      </div>
-  </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button form="formDeCreacionProyecto" [disabled]="!formProyecto.valid" class="btn btn-primary">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal, Actualizar Proyecto-->
 <div class="modal fade" id="actualizarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar información del proyecto</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form [formGroup]="formProyecto" (ngSubmit)="onActualizarProyecto()"
-                  id="formDeActualizacionProyecto">
-                  <div class="form-floating mb-1">
-                    <input type="text" formControlName="nombre" class="form-control" id="nombre"
-                    [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
-                    <label for="nombre">Nombre del Proyecto</label>
-                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
-                        <div *ngIf="nombre.errors?.['required']" >
-                            El nombre es obligatorio.
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar información del proyecto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formProyecto" (ngSubmit)="onActualizarProyecto()" id="formDeActualizacionProyecto">
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                            [ngClass]="{'is-invalid':nombre?.errors && nombre?.dirty,'is-valid':!nombre?.errors && nombre?.dirty}">
+                        <label for="nombre">Nombre del Proyecto</label>
+                        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mb-3">
+                            <div *ngIf="nombre.errors?.['required']">
+                                El nombre es obligatorio.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-floating mb-1">
-                    <textarea class="form-control" formControlName="descripcion"
-                            placeholder="Información detallada" id="descripcion" style="height: 75px"
+                    <div class="form-floating mb-1">
+                        <textarea class="form-control" formControlName="descripcion" placeholder="Información detallada"
+                            id="descripcion" style="height: 75px"
                             [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.dirty,'is-valid':!descripcion?.errors && descripcion?.dirty}"></textarea>
-                    <label for="descripcion">Breve descripcion del proyecto</label>
-                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger mb-3">
-                        <div *ngIf="descripcion.errors?.['required']" >
-                            La descripción es obligatoria.
+                        <label for="descripcion">Breve descripcion del proyecto</label>
+                        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
+                            class="text-danger mb-3">
+                            <div *ngIf="descripcion.errors?.['required']">
+                                La descripción es obligatoria.
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-floating mb-1">
-                    <input type="text" formControlName="linkProyecto" class="form-control" id="linkProyecto">
-                    <label for="linkProyecto">Url del Proyecto</label>
-                </div>
-
-                <div class="form-floating mb-1">
-                    <input type="text" formControlName="imagenProyecto" class="form-control" id="imagenProyecto">
-                    <label for="imagenProyecto">Url de imagen ilustrativa</label>
-                </div>
-                <div class="form-floating mb-1">
-                    <input type="date" formControlName="fechaCreacionProyecto" class="form-control" id="fechaCreacionProyecto">
-                    <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
-                    <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
-                    class="text-danger mb-3">
-                    <div *ngIf="fechaCreacionProyecto.errors?.['fechaMenor']">
-                        <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="linkProyecto" class="form-control" id="linkProyecto">
+                        <label for="linkProyecto">Url del Proyecto</label>
                     </div>
-                    <div *ngIf="fechaCreacionProyecto.errors?.['fechaMayor']">
-                        <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
-                    </div>
-                </div>
 
+                    <div class="form-floating mb-1">
+                        <input type="text" formControlName="imagenProyecto" class="form-control" id="imagenProyecto">
+                        <label for="imagenProyecto">Url de imagen ilustrativa</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="date" formControlName="fechaCreacionProyecto" class="form-control"
+                            id="fechaCreacionProyecto">
+                        <label for="fechaCreacionProyecto">Fecha de la creación del proyecto</label>
+                        <div *ngIf="(fechaCreacionProyecto.errors?.['fechaMenor'] || fechaCreacionProyecto.errors?.['fechaMayor']) && fechaCreacionProyecto.touched"
+                            class="text-danger mb-3">
+                            <div *ngIf="fechaCreacionProyecto.errors?.['fechaMenor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">mayor</span> a 01-01-2000.</p>
+                            </div>
+                            <div *ngIf="fechaCreacionProyecto.errors?.['fechaMayor']">
+                                <p>La fecha debe ser <span style="font-weight: bold;">menor</span> al día de hoy.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+                <!-- submit no funciona. está fuera del form -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button form="formDeActualizacionProyecto" [disabled]="!formProyecto.valid" class="btn btn-primary"
+                        data-bs-dismiss="modal">
+                        Actualizar
+                    </button>
                 </div>
-                  
-              </form>
-              <!-- submit no funciona. está fuera del form -->
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cerrar
-                  </button>
-                  <button form="formDeActualizacionProyecto" [disabled]="!formProyecto.valid" class="btn btn-primary" data-bs-dismiss="modal">
-                      Actualizar
-                  </button>
-              </div>
-          </div>
-      </div>
-  </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal, Eliminar Proyecto-->
 <div class="modal fade" id="eliminarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-          <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Proyecto</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Proyecto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-          <div class="modal-body">
-              <p>Seguro que se desea eliminar el proyecto "{{formProyecto.value.nombre}}" ?</p>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                  <button (click)="onEliminarProyecto()" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
-              </div>
-          </div>
-      </div>
-  </div>
+            <div class="modal-body">
+                <p>Seguro que se desea eliminar el proyecto "{{formProyecto.value.nombre}}" ?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button (click)="onEliminarProyecto()" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

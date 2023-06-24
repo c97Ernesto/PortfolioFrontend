@@ -26,6 +26,6 @@ export class RedSocialService {
   }
   
   public eliminarRedSocial(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiServerUrl}/RedSocial/eliminar/${id}`);
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/redSocial/eliminar/${id}`);
   }
 }

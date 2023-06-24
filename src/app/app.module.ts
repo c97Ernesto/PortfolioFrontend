@@ -22,6 +22,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { DatePipe } from '@angular/common';
 import { RedesComponent } from './componentes/footer/redes/redes.component';
+import { PerfilFooterComponent } from './componentes/footer/perfil-footer/perfil-footer.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { RedesComponent } from './componentes/footer/redes/redes.component';
     SkillComponent,
     FooterComponent,
     RedesComponent,
+    PerfilFooterComponent,
   ],
   imports: [
     BrowserModule,

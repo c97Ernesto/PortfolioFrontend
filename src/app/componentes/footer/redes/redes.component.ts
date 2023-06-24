@@ -12,25 +12,29 @@ import { RedSocialService } from 'src/app/service/red-social.service';
 })
 export class RedesComponent {
   redesSociales: RedSocial[] = [];
-  form: FormGroup;
-  isLogged: boolean = false;
+
+  formRedSocial: FormGroup;
+
+  showEditIcon: boolean = false;
+
+  isLogged = false;
 
   constructor(
     private fb: FormBuilder,
     private redSocialService: RedSocialService,
     private loginService: LoginService
   ) {
-    this.form = this.fb.group({
+    this.formRedSocial = this.fb.group({
       id: [],
-      nombre: ['', [Validators.required]],
-      enlace: ['', [Validators.required]],
+      nombre: [],
+      enlace: [],
       icono: [],
     });
   }
 
-  get nombre() { return this.form.get('nombre'); }
-  get enlace() { return this.form.get('enlace'); }
-  get icono() { return this.form.get('icono'); }
+  get nombre() { return this.formRedSocial.get('nombre'); }
+  get enlace() { return this.formRedSocial.get('enlace'); }
+  get icono() { return this.formRedSocial.get('icono'); }
 
   ngOnInit(): void {
     this.obtenerRedesSociales();
@@ -49,12 +53,12 @@ export class RedesComponent {
   }
 
   public onAgregarRedSocial(): void {
-    if (this.form.valid) {
+    if (this.formRedSocial.valid) {
       const redSocial = new RedSocial(
-        this.form.value.id,
-        this.form.value.nombre,
-        this.form.value.enlace,
-        this.form.value.icono
+        this.formRedSocial.value.id,
+        this.formRedSocial.value.nombre,
+        this.formRedSocial.value.enlace,
+        this.formRedSocial.value.icono
       );
 
       console.log(redSocial);
@@ -69,19 +73,19 @@ export class RedesComponent {
         }
       );
     } else {
-      this.form.markAllAsTouched();
+      this.formRedSocial.markAllAsTouched();
     }
   }
 
 
 
   public onActualizarRedSocial(): void {
-    if (this.form.valid) {
+    if (this.formRedSocial.valid) {
       const redSocial = new RedSocial(
-        this.form.value.id,
-        this.form.value.nombre,
-        this.form.value.enlace,
-        this.form.value.icono
+        this.formRedSocial.value.id,
+        this.formRedSocial.value.nombre,
+        this.formRedSocial.value.enlace,
+        this.formRedSocial.value.icono
       );
 
       this.redSocialService.actualizarRedSocial(redSocial).subscribe(
@@ -103,10 +107,11 @@ export class RedesComponent {
   }
 
   public onEliminarRedSocial(): void {
-    this.redSocialService.eliminarRedSocial(this.form.value.id).subscribe(
+    this.redSocialService.eliminarRedSocial(this.formRedSocial.value.id).subscribe(
       (response: void) => {
         console.log(response);
         this.obtenerRedesSociales();
+        this.resetForm();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -115,7 +120,7 @@ export class RedesComponent {
   }
 
   private setValueForm(redSocial: RedSocial) {
-    this.form.setValue({
+    this.formRedSocial.setValue({
       id: redSocial.id,
       nombre: redSocial.nombre,
       enlace: redSocial.url,
@@ -124,7 +129,7 @@ export class RedesComponent {
   }
 
   public resetForm() {
-    this.form.reset();
+    this.formRedSocial.reset();
   }
 
   public hayElementos(): boolean {
@@ -147,10 +152,10 @@ export class RedesComponent {
       this.setValueForm(redSocial);
       boton.setAttribute('data-bs-target', '#actualizarRedSocialModal');
     }
-    if (modo === 'eliminar') {
-      this.setValueForm(redSocial); //seteo los valores del formulario
-      boton.setAttribute('data-bs-target', '#eliminarRedSocialModal');
-    }
+    // if (modo === 'eliminar') {
+    //   this.setValueForm(redSocial); //seteo los valores del formulario
+    //   boton.setAttribute('data-bs-target', '#eliminarRedSocialModal');
+    // }
 
     contenedor.appendChild(boton);
     boton.click();
