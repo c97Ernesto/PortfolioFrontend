@@ -1,19 +1,19 @@
-<div id="container-redSocial" class="container">
+<div id="container-redSocial" class="text-center">
   <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
     <div *ngFor="let redSocial of redesSociales" class="mb-3">
       <div *ngIf="!isLogged" class="">
         <a [href]="redSocial?.url"
-          class="row text-center" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
-          <i  [class]="redSocial?.icono" style="font-size: 2rem; color: rgb(103, 153, 247);"></i>
-          <span>{{redSocial?.nombre}}</span>
+          class="row text-center icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
+          <i  [class]="redSocial?.icono" class="icon-footer-red"></i>
+          <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
         </a>
       </div>
-      <div *ngIf="isLogged">
-        <button type="button" class="btn text-white row " (click)="onOpenModal(redSocial, 'actualizar')"
+      <div *ngIf="isLogged" >
+        <button type="button" class="btn text-white row" (click)="onOpenModal(redSocial, 'actualizar')"
           (mouseenter)="showEditIcon = true" (mouseleave)="showEditIcon = false">
-          <i class="bi bi-pencil" style="font-size: 2rem; color: rgb(103, 153, 247);" *ngIf="showEditIcon"></i>
-          <i [class]="redSocial?.icono" style="font-size: 2rem; color: rgb(103, 153, 247);" *ngIf="!showEditIcon"></i>
-          <span>{{redSocial?.nombre}}</span>
+          <i class="bi bi-pencil icon-footer-red"  *ngIf="showEditIcon"></i>
+          <i [class]="redSocial?.icono" class="icon-footer-red" *ngIf="!showEditIcon"></i>
+          <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
         </button>
       </div>
 
