@@ -9,7 +9,7 @@
         </a>
       </div>
       <div *ngIf="isLogged" >
-        <button type="button" class="btn text-white row" (click)="onOpenModal(redSocial, 'actualizar')"
+        <button type="button" class="btn text-white" (click)="onOpenModal(redSocial, 'actualizar')"
           (mouseenter)="showEditIcon = true" (mouseleave)="showEditIcon = false">
           <i class="bi bi-pencil icon-footer-red"  *ngIf="showEditIcon"></i>
           <i [class]="redSocial?.icono" class="icon-footer-red" *ngIf="!showEditIcon"></i>
@@ -20,7 +20,7 @@
     </div>
     <div *ngIf="isLogged">
       <button class="btn btn-outline-primary rounded-circle" (click)="onOpenModal(null, 'agregar')">
-        <i class="bi bi-plus-lg" style="font-size: 1.5rem;"></i>
+        <i class="bi bi-plus-lg" style="font-size: 1.2rem;"></i>
       </button>
     </div>
   </div>
