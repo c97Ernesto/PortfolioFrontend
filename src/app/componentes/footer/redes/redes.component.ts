@@ -28,7 +28,7 @@ export class RedesComponent {
       id: [],
       nombre: [],
       enlace: [],
-      icono: [],
+      icono: ['',[Validators.required]],
     });
   }
 

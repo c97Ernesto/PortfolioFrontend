@@ -1,29 +1,24 @@
-<div id="container-redSocial" class="text-center">
-  <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
-    <div *ngFor="let redSocial of redesSociales" class="mb-3">
-      <div *ngIf="!isLogged" class="">
-        <a [href]="redSocial?.url"
-          class="row text-center icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
-          <i  [class]="redSocial?.icono" class="icon-footer-red"></i>
-          <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
-        </a>
-      </div>
-      <div *ngIf="isLogged" >
-        <button type="button" class="btn text-white" (click)="onOpenModal(redSocial, 'actualizar')"
-          (mouseenter)="showEditIcon = true" (mouseleave)="showEditIcon = false">
-          <i class="bi bi-pencil icon-footer-red"  *ngIf="showEditIcon"></i>
-          <i [class]="redSocial?.icono" class="icon-footer-red" *ngIf="!showEditIcon"></i>
-          <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
-        </button>
-      </div>
-
-    </div>
+<div id="container-redSocial"  >
+  <ul class="row row-cols-4 row-cols-sm-3 row-cols-md-5 " style="margin: 0%;">
+    <li *ngFor="let redSocial of redesSociales" class="mb-3  ">
+      <a *ngIf="!isLogged" [href]="redSocial?.url" class="row icon-link-hover"
+        style="--bs-icon-link-transform: translate3d(0, -.325rem, 0);">
+        <i [class]="redSocial?.icono" class="icon-footer-red"></i>
+        <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
+      </a>
+      <button *ngIf="isLogged" type="button" class="btn text-white" (click)="onOpenModal(redSocial, 'actualizar')"
+        (mouseenter)="showEditIcon = true" (mouseleave)="showEditIcon = false">
+        <i class="bi bi-pencil icon-footer-red" *ngIf="showEditIcon"></i>
+        <i [class]="redSocial?.icono" class="icon-footer-red" *ngIf="!showEditIcon"></i>
+        <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
+      </button>
+    </li>
     <div *ngIf="isLogged">
       <button class="btn btn-outline-primary rounded-circle" (click)="onOpenModal(null, 'agregar')">
         <i class="bi bi-plus-lg" style="font-size: 1.2rem;"></i>
       </button>
     </div>
-  </div>
+  </ul>
 </div>
 
 <!-- Modal, Agregar RedSocial-->
@@ -39,13 +34,9 @@
         <form [formGroup]="formRedSocial" (ngSubmit)="onAgregarRedSocial()" id="formDeCreacionRedSocial">
 
           <div class="mb-3">
-            <input class="form-control" type="text" formControlName="nombre" placeholder="Nombre o Número de teléfono"
-              aria-label="default input example">
-          </div>
-
-          <div class="mb-3">
-            <select class="form-select" formControlName="icono" aria-label="Default select example" id="iconoRedSocial">
-              <option selected>Seleccione Red Social</option>
+            <label for="exampleFormControlInput1" class="form-label">Ícono</label>
+            <select class="form-select" formControlName="icono" placeholder="Ícono" aria-label="Default select example"
+              id="iconoRedSocial">
               <option value="bi bi-signal">Signal</option>
               <option value="bi bi-telegram">Telegram</option>
               <option value="bi bi-whatsapp">Whatsapp</option>
@@ -63,10 +54,14 @@
               <option value="bi bi-spotify">Spotify</option>
               <!-- Agrega más opciones de íconos aquí -->
             </select>
+            <div class="form-text">
+              La elección del ícono es obligatoria.
+            </div>
           </div>
 
           <div class="mb-3">
-            <input class="form-control" type="text" formControlName="enlace" placeholder="Enlace"
+            <label for="exampleFormControlInput1" class="form-label">Enlace</label>
+            <input class="form-control" type="text" formControlName="enlace" placeholder="https://twitter.com/"
               aria-label="default input example">
           </div>
 
@@ -95,20 +90,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar información del proyecto</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar información de la Red Social</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="formRedSocial" (ngSubmit)="onActualizarRedSocial()" id="formDeActualizacionRedSocial">
 
           <div class="mb-3">
-            <input class="form-control" type="text" formControlName="nombre" placeholder="Nombre o Número de teléfono"
-              aria-label="default input example">
-          </div>
-
-          <div class="mb-3">
-            <select class="form-select" formControlName="icono" aria-label="Default select example" id="iconoRedSocial">
-              <option selected>Seleccione Red Social</option>
+            <label for="exampleFormControlInput1" class="form-label">Ícono</label>
+            <select class="form-select" formControlName="icono" placeholder="Ícono" aria-label="Default select example"
+              id="iconoRedSocial">
               <option value="bi bi-signal">Signal</option>
               <option value="bi bi-telegram">Telegram</option>
               <option value="bi bi-whatsapp">Whatsapp</option>
@@ -126,10 +117,14 @@
               <option value="bi bi-spotify">Spotify</option>
               <!-- Agrega más opciones de íconos aquí -->
             </select>
+            <div class="form-text">
+              La elección del ícono es obligatoria.
+            </div>
           </div>
 
           <div class="mb-3">
-            <input class="form-control" type="text" formControlName="enlace" placeholder="Enlace"
+            <label for="exampleFormControlInput1" class="form-label">Enlace</label>
+            <input class="form-control" type="text" formControlName="enlace" placeholder="https://twitter.com/"
               aria-label="default input example">
           </div>
 

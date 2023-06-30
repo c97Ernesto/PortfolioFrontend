@@ -1,18 +1,6 @@
 .container-footer {
-  color: #ffffff;
-  
   background-color: #0a244b;
-  color: #fff;
   padding: 10px;
 }
 
-ul {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
 
-li {
-  margin: 0 20px;
-}

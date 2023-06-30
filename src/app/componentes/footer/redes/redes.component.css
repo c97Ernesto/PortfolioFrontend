@@ -3,3 +3,11 @@
   font-size: 2rem;
   color: rgb(103, 153, 247);
 }
+
+ul {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0%;
+  padding: 0%;
+}

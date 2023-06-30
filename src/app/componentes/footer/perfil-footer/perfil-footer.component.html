@@ -1,14 +1,13 @@
-<div class="">
-  <ul class="" *ngIf="persona?.telefono || persona?.email" style="padding: 0%;">
-    <li *ngIf="persona?.email" class="d-flex align-items-center">
+<div class="text-white">
+  <ul  *ngIf="persona?.telefono || persona?.email" >
+    <li *ngIf="persona?.email" >
       <i class="bi bi-envelope-at " style="padding-right: 5px; font-size: 1.5rem;"></i>
       {{persona?.email}}
     </li>
 
-    <li *ngIf="persona?.telefono" class="d-flex align-items-center">
+    <li *ngIf="persona?.telefono" >
       <i class="bi-telephone " style="padding-right: 5px; font-size: 1.5rem; "></i>
       {{persona?.telefono}}
-    </li>
-    
+    </li>    
   </ul>
 </div>

@@ -48,61 +48,6 @@
     </div>
 </div>
 
-<!-- <div class="card" id="container-educacion">
-    <div class="card-body">
-        <div class="d-flex">
-            <h3 class="card-title">Estudios</h3>
-        </div>
-        <div class="row align-items-center justify-content-between">
-            <div class="list-group col-lg-8 col-md-12">
-                <div *ngFor="let educacion of estudios" class="list-group-item d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-
-                        <div class="logo-image-container">
-                            <img *ngIf="educacion?.logo" src="{{ educacion?.logo }}" alt="logo-de-la-educacion">
-                            <img *ngIf="!educacion?.logo" src="../../../../assets/Imagenes/mortarboard-bootstrap.svg"
-                                alt="logo-por-defecto-de-la-eduacion">
-                        </div>
-
-                        <div class="list-info ">
-                            <h5 class="mb-1">{{educacion?.nombre}}</h5>
-                            <p class="mb-1 description-style">{{educacion?.descripcion}}</p>
-                            
-                            <div *ngIf="educacion?.fechaInicio || educacion?.fechaFin" class="d-flex">
-                                <p *ngIf="educacion?.fechaInicio" class="mb-1" style="padding-right: 10px;">
-                                    Desde: {{educacion?.fechaInicio | date: 'shortDate'}}
-                                </p>
-                                <p *ngIf="educacion?.fechaFin" class="mb-1">
-                                    Hasta: {{educacion?.fechaFin | date: 'shortDate'}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div *ngIf="isLogged" class="d-flex align-items-start">
-                        <button (click)="onOpenModal(educacion, 'actualizar')" class="btn btn-secondary"
-                            data-placement="top" data-original-title="Edit">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button (click)="onOpenModal(educacion, 'eliminar')" class="btn btn-danger" data-placement="top"
-                            data-original-title="Delete">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="isLogged" class="col-lg-4">
-                <a class="btn btn-primary" (click)="onOpenModal(null, 'agregar')">
-                    Nuevo Estudio
-                </a>
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
-
-
 <!-- Modal, Agregar Educacion-->
 <div class="modal fade" id="agregarEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
