@@ -1,8 +1,7 @@
-<div id="container-redSocial" class="text-end" >
-  <ul class="row row-cols-4 row-cols-sm-3 row-cols-md-5 " style="margin: 0%;">
+<div id="container-redSocial"  >
+  <ul class="row row-cols-4 row-cols-sm-3 row-cols-md-5 " >
     <li *ngFor="let redSocial of redesSociales" class="mb-3  ">
-      <a *ngIf="!isLogged" [href]="redSocial?.url" class="row icon-link-hover"
-        style="--bs-icon-link-transform: translate3d(0, -.325rem, 0);">
+      <a *ngIf="!isLogged" [href]="redSocial?.url" class="icon-link-hover">
         <i [class]="redSocial?.icono" class="icon-footer-red"></i>
         <span style="word-break: break-word;">{{redSocial?.nombre}}</span>
       </a>
@@ -19,6 +18,7 @@
       </button>
     </div>
   </ul>
+  
 </div>
 
 <!-- Modal, Agregar RedSocial-->

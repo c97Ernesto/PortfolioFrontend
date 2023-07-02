@@ -1,0 +1,81 @@
+[debug] [2023-07-02T03:27:15.011Z] ----------------------------------------------------------------------
+[debug] [2023-07-02T03:27:15.016Z] Command:       /home/ernesto/.nvm/versions/node/v18.15.0/bin/node /home/ernesto/.nvm/versions/node/v18.15.0/bin/firebase deploy
+[debug] [2023-07-02T03:27:15.017Z] CLI Version:   12.0.0
+[debug] [2023-07-02T03:27:15.017Z] Platform:      linux
+[debug] [2023-07-02T03:27:15.018Z] Node Version:  v18.15.0
+[debug] [2023-07-02T03:27:15.019Z] Time:          Sun Jul 02 2023 00:27:15 GMT-0300 (hora estándar de Argentina)
+[debug] [2023-07-02T03:27:15.019Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-07-02T03:27:15.025Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-07-02T03:27:15.388Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-07-02T03:27:15.389Z] > authorizing via signed-in user (ernesto.cafre@hotmail.com)
+[debug] [2023-07-02T03:27:15.389Z] [iam] checking project portfoliofrontend-ernesto for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-07-02T03:27:15.392Z] > refreshing access token with scopes: []
+[debug] [2023-07-02T03:27:15.395Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-07-02T03:27:15.396Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-07-02T03:27:15.566Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-07-02T03:27:15.566Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-07-02T03:27:15.828Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliofrontend-ernesto:testIamPermissions [none]
+[debug] [2023-07-02T03:27:15.828Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliofrontend-ernesto:testIamPermissions x-goog-quota-user=projects/portfoliofrontend-ernesto
+[debug] [2023-07-02T03:27:15.829Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliofrontend-ernesto:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-07-02T03:27:16.040Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-07-02T03:27:16.040Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-07-02T03:27:16.815Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliofrontend-ernesto:testIamPermissions 200
+[debug] [2023-07-02T03:27:16.815Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliofrontend-ernesto:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-07-02T03:27:16.819Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfoliofrontend-ernesto [none]
+[debug] [2023-07-02T03:27:17.328Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfoliofrontend-ernesto 200
+[debug] [2023-07-02T03:27:17.328Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfoliofrontend-ernesto {"projectId":"portfoliofrontend-ernesto","projectNumber":"206521053376","displayName":"portfolioFrontend-ernesto","name":"projects/portfoliofrontend-ernesto","resources":{"hostingSite":"portfoliofrontend-ernesto"},"state":"ACTIVE","etag":"1_214563a3-87ca-47f1-833e-a5f82a9fd0a6"}
+[info] 
+[info] === Deploying to 'portfoliofrontend-ernesto'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-07-02T03:27:17.352Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions [none]
+[debug] [2023-07-02T03:27:17.352Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-07-02T03:27:18.655Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions 200
+[debug] [2023-07-02T03:27:18.656Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions {"name":"projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[portfoliofrontend-ernesto]: beginning deploy... 
+[info] i  hosting[portfoliofrontend-ernesto]: found 19 files in dist/portfolio 
+[debug] [2023-07-02T03:27:18.685Z] [hosting] uploading with 200 concurrency
+[debug] [2023-07-02T03:27:18.911Z] [hosting] hash cache [ZGlzdC9wb3J0Zm9saW8] stored for 19 files
+[debug] [2023-07-02T03:27:18.912Z] [hosting][hash queue][FINAL] {"max":114,"min":21,"avg":56.421052631578945,"active":0,"complete":19,"success":19,"errored":0,"retried":0,"total":19,"elapsed":119}
+[debug] [2023-07-02T03:27:18.912Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c:populateFiles [none]
+[debug] [2023-07-02T03:27:18.913Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c:populateFiles {"files":{"/favicon.ico":"5ba04cf43d3c8c026bd5edd43046db96acb28b5686d99ea7d7e148feabfffc8f","/index.html":"5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be","/runtime.4780622838e52590.js":"6b9d472ff18f3268d6b62bcac0e391759bbb0bc4712840cdea2287d078bfa8be","/3rdpartylicenses.txt":"d3f9a78d2bc0b6c352d8d48af7893d3ff9b288f2d4f483370df31d95fadb09f9","/polyfills.05f54d0273a14613.js":"1c1b69e742cba4c1cdbb3585e72d8b1eb2047d4a963753963a5dc6bc0bb9f76b","/assets/data.json":"517bd6e71efb71bc95621243d3dc54aa25a673e640f103d5ce4ef754cb78bc32","/assets/Imagenes/argentina-programa.png":"82d4c6ea833652985f687686368dbaa2dcf1d5b3c88bd73ffb68c068026eaf99","/assets/Imagenes/bookBootstrap-svg.svg":"9a0ad2c9cbf6ecc62c765379757f38cb692f22a4e73dba90bb108ab236427838","/assets/Imagenes/calculator-bootstrap.svg":"d602f6cfe86c6368f6b0e683a71d535a437472577bce3511baecc65172a4dee3","/assets/Imagenes/laptopBoostrap-svg.svg":"f02a4245767106fee09e0902acfc564ffa55fd53400d8ba5db3408e809858358","/assets/Imagenes/mortarboard-bootstrap.svg":"9119e0cdf20faeed40b72d6f7132d6f4eae9a996df75633e1c4d517807822fb7","/assets/Imagenes/mortarboard-fill-bootstrap.svg":"a6229fee7354eeccde64ec81479558f23c3b0c669c42b668610fb2490f55338b","/assets/Imagenes/pencilBoostrap-svg.svg":"0a9e1e3a17a9bbd4e4c58241160302cef3d4bb959203ea675a91fd444100b99e","/assets/Imagenes/telephone-bootstrap.svg":"17484d4fcccaa111385a9f2a19fd6889df114e871a36a456938721df635044c0","/assets/Imagenes/perfil-del-usuario.png":"26947c15b351f8c148761d5fe6fad5fe8df4ec7c486e91f49d83e831fa296a66","/scripts.8c755a8534daf31e.js":"f26d1b0567c88746c2a99c27accc17b46b91d7771ae937341bc8a64ecbec852f","/styles.2b25f06d08a82b50.css":"efb4000e25f674f44d2717706440e35fa48e3ff17bcb3abc2f796df2cdc55fe4","/assets/Imagenes/fondo.jpg":"61d3899d6e642e9bd01cb3a781f8f07b710db90abb7c125ec3766c80fb37c873","/main.969cca84c1d3f83a.js":"c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a"}}
+[debug] [2023-07-02T03:27:20.024Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c:populateFiles 200
+[debug] [2023-07-02T03:27:20.025Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c:populateFiles {"uploadRequiredHashes":["5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be","c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files"}
+[debug] [2023-07-02T03:27:20.030Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be [none]
+[debug] [2023-07-02T03:27:20.030Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be [stream]
+[debug] [2023-07-02T03:27:20.036Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a [none]
+[debug] [2023-07-02T03:27:20.036Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a [stream]
+[debug] [2023-07-02T03:27:20.042Z] [hosting][populate queue][FINAL] {"max":1119,"min":1119,"avg":1119,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1132}
+[debug] [2023-07-02T03:27:20.043Z] [hosting] uploads queued: 2
+[debug] [2023-07-02T03:27:21.828Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be 200
+[debug] [2023-07-02T03:27:21.828Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/5fd37b628a89d9e10a54d08b1547109dcc20e0c7a37725dedbcb2a73541141be [stream]
+[debug] [2023-07-02T03:27:21.875Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a 200
+[debug] [2023-07-02T03:27:21.876Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c/files/c3b7ec7fae7b141272f6fe45fdaa01ba872b380805b372be199072ee33f63c5a [stream]
+[debug] [2023-07-02T03:27:21.877Z] [hosting][upload queue][FINAL] {"max":1848,"min":1802,"avg":1825,"active":0,"complete":2,"success":2,"errored":0,"retried":0,"total":2,"elapsed":1851}
+[info] ✔  hosting[portfoliofrontend-ernesto]: file upload complete 
+[debug] [2023-07-02T03:27:21.880Z] [hosting] deploy completed after 3217ms
+[debug] [2023-07-02T03:27:21.889Z] [
+  {
+    "config": {
+      "public": "dist/portfolio",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "portfoliofrontend-ernesto"
+    },
+    "version": "projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c"
+  }
+]
+[info] i  hosting[portfoliofrontend-ernesto]: finalizing version... 
+[debug] [2023-07-02T03:27:21.897Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c updateMask=status%2Cconfig
+[debug] [2023-07-02T03:27:21.898Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c {"status":"FINALIZED","config":{}}
+[debug] [2023-07-02T03:27:22.960Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c 200
+[debug] [2023-07-02T03:27:22.960Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c {"name":"projects/206521053376/sites/portfoliofrontend-ernesto/versions/04588e7efe3fa12c","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-07-02T03:27:18.289952Z","createUser":{"email":"ernesto.cafre@hotmail.com"},"finalizeTime":"2023-07-02T03:27:22.783067Z","finalizeUser":{"email":"ernesto.cafre@hotmail.com"}}
+[debug] [2023-07-02T03:27:22.961Z] [hosting] finalized version for portfoliofrontend-ernesto:[object Object]
+[info] ✔  hosting[portfoliofrontend-ernesto]: version finalized 
+[info] i  hosting[portfoliofrontend-ernesto]: releasing new version... 
+[debug] [2023-07-02T03:27:22.964Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/channels/live/releases versionName=projects%2F206521053376%2Fsites%2Fportfoliofrontend-ernesto%2Fversions%2F04588e7efe3fa12c
+[debug] [2023-07-02T03:27:22.965Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoliofrontend-ernesto/channels/live/releases {}
